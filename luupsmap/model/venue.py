@@ -16,8 +16,8 @@ class Venue(db.Model):
     phone = db.Column(db.String(32))
     opening_hours = db.Column(db.Text())
     address = db.Column(db.String(256), nullable=False)
-    longitude = db.Column(db.Float(), nullable=False)
     latitude = db.Column(db.Float(), nullable=False)
+    longitude = db.Column(db.Float(), nullable=False)
 
     def __init__(self, name, description, venue_type, homepage, email, phone, opening_hours, address):
         self.name = name
