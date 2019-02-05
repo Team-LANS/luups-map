@@ -29,6 +29,8 @@ class Venue(db.Model):
         self.phone = phone
         self.opening_hours = opening_hours
         self.address = address
+        self.latitude = 0.0
+        self.longitude = 0.0
 
     def __repr__(self):
         return '[Venue "{}" ({})]'.format(self.name, repr(self.venue_type))
