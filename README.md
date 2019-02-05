@@ -44,3 +44,8 @@ flask db migrate
 flask db upgrade
 ```
 
+To seed the database with data run
+
+```bash
+flask data seed
+```
