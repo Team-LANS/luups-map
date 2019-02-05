@@ -1,6 +1,6 @@
 """Model for restaurants, bars and event locations that accept vouchers."""
 
-from luupsmap.model import db
+from luupsmap import db
 from luupsmap.model.enum.venue_type import VenueType
 
 
@@ -15,6 +15,7 @@ class Venue(db.Model):
     email = db.Column(db.String(64))
     phone = db.Column(db.String(32))
     opening_hours = db.Column(db.Text())
+    os = db.Column(db.Text())
     address = db.Column(db.String(256), nullable=False)
     latitude = db.Column(db.Float(), nullable=False)
     longitude = db.Column(db.Float(), nullable=False)
