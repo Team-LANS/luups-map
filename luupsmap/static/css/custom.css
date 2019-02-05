@@ -1,2 +1,58 @@
-/* CUSTOM CSS BELONGS HERE... */
+/* FONTS **********************************************************************/
+/* TODO use local font */
+@import url('https://fonts.googleapis.com/css?family=Amaranth:400,700|Open+Sans:300,400,700');
 
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+.h1, .h2, .h3, .h4, h1, h2, h3, h4 {
+  font-family: "Amaranth", sans-serif;
+}
+
+.thin {
+  font-weight: 300;
+}
+
+/* GENERAL LAYOUT *************************************************************/
+
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+main {
+  flex-grow: 1;
+}
+
+footer {
+  padding-bottom: .25rem;
+}
+
+/* LINKS **********************************************************************/
+
+a {
+  color: #25ba84;
+  font-weight: 700;
+  text-decoration: none;
+}
+a:active,
+a:focus,
+a:hover {
+  color: #21a777;
+}
+
+footer a {
+  color: #484848;
+}
+footer a:active,
+footer a:focus,
+footer a:hover {
+  color: #414141;
+  text-decoration: underline;
+}
