@@ -13,6 +13,7 @@ class Venue(db.Model):
     homepage = db.Column(db.String(64))
     email = db.Column(db.String(64))
     phone = db.Column(db.String(32))
+    venue_type = db.Column(db.Enum(VenueType), nullable=True)
     opening_hours = db.Column(db.Text())
     address = db.Column(db.String(256), nullable=False)
     latitude = db.Column(db.Float(), nullable=False)
