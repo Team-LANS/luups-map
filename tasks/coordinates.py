@@ -15,6 +15,12 @@ from dotenv import load_dotenv, find_dotenv
 
 def main():
     addresses = list(sys.argv[1:])
+    if not addresses:
+        addresses = []
+        for line in sys.stdin:
+            line = line.strip()
+            addresses.append(line)
+
     load_dotenv(find_dotenv())
     gmaps_api_key = os.getenv("GMAPS_API_KEY")
     gmaps = googlemaps.Client(key=gmaps_api_key)

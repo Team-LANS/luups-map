@@ -1,0 +1,41 @@
+Ausstellungsstr. 63, 1020 Wien | 48.2181676 | 16.4078821
+Laurenzerberg 3, 1010 Wien | 48.2109296 | 16.3778659
+Whäringer Str. 12, 1090 Wien | 48.2167778 | 16.3600738
+Wiedner Hauptstr. 35, 1040 Wien | 48.1944784 | 16.3673893
+Pfeilgasse 27, 1080 Wien | 48.2089484 | 16.3434956
+Zollergasse 2, 1070 Wien | 48.1992751 | 16.3512409
+Schwarzspanierstr. 22, 1090 Wien | 48.2170263 | 16.3590272
+Whäringer Gürtel 162, 1090 Wien | 48.230901 | 16.3525584
+Gumpendorfer Str. 36, 1060 Wien | 48.1987291 | 16.3575349
+Otto-Bauer-Gasse 11, 1060 Wien | 48.1957689 | 16.3487646
+Amerlingstr. 15, 1060 Wien | 48.1974896 | 16.3505101
+Reindorfgasse 42, 1150 Wien | 48.1908533 | 16.3301859
+Lerchenfelderstr. 99-101, 1070 Wien | 48.2074219 | 16.3435234
+Grillparzerstr. 6, 1010 Wien | 48.2126564 | 16.3581608
+Kirchengasse 44, 1070 Wien | 48.2044242 | 16.351686
+Meiselstr. 2, 1150 Wien | 48.1974825 | 16.3232923
+Gumpendorfer Str. 37, 1060 Wien | 48.1986689 | 16.3580129
+Weyringerg. 36, 1040 Wien | 48.1883846 | 16.3742402
+Phorusgassse 8, 1040 Wien | 48.1901246 | 16.3638214
+Landstraßer Hauptstr. 71/G01, 1030 Wien | 48.2012309 | 16.3934624
+Neubaugasse 45, 1070 Wien | 48.20258640000001 | 16.3489424
+Theobaldgasse 16, 1060 Wien | 48.2002855 | 16.3595533
+Wipplingerstr. 6, 1010 Wien | 48.2117344 | 16.3713102
+Siebensterngasse 29, 1070 Wien | 48.20203919999999 | 16.3522683
+Burggasse 6-8, 1070 Wien | 48.2043708 | 16.3554785
+Lange Gasse 78, 1080 Wien | 48.21468309999999 | 16.3511642
+Praterstr. 16, 1020 Wien | 48.2133617 | 16.3822807
+Landstraßer Hauptstr. 74, 1030 Wien | 48.2009278 | 16.391988
+Heinestr. 35, 1020 Wien | 48.2196131 | 16.3880717
+Landstraßer Hauptstr. 86, 1030 Wien | 48.2000992 | 16.3930174
+Yppenplatz 153-155, 1160 Wien | 48.21344010000001 | 16.3358906
+Webgasse 3, 1060 Wien | 48.1923689 | 16.3480212
+Gumpendorfer Str. 10-12, 1060 Wien | 48.2002824 | 16.3611614
+Mariahilferstr. 147, 1150 Wien | 48.1943475 | 16.3359463
+Alser Str. 19, 1080 | 48.2147544 | 16.3518641
+Judengasse 5, 1010 Wien | 48.2114641 | 16.3735361
+Lerchenfelderstr. 34 | 48.20646190000001 | 16.3502846
+Josefstädter Str. 35, 1080 Wien | 48.2095175 | 16.348442
+Zollergasse 5/2, 1070 Wien | 48.1991733 | 16.350998
+Rahlgasse 1, 1060 Wien | 48.2012244 | 16.361548
+Riesenradplatz 1, 1022 Wien | 48.2175095 | 16.3966444

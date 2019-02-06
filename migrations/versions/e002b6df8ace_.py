@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 7afe64c21e4b
+Revision ID: e002b6df8ace
 Revises: 
-Create Date: 2019-02-05 00:17:10.993090
+Create Date: 2019-02-06 23:53:37.864998
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7afe64c21e4b'
+revision = 'e002b6df8ace'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,14 +22,13 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=128), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
-    sa.Column('venue_type', sa.Enum('RESTAURANT', 'BAR', 'VENUE', name='venuetype'), nullable=False),
     sa.Column('homepage', sa.String(length=64), nullable=True),
     sa.Column('email', sa.String(length=64), nullable=True),
     sa.Column('phone', sa.String(length=32), nullable=True),
     sa.Column('opening_hours', sa.Text(), nullable=True),
     sa.Column('address', sa.String(length=256), nullable=False),
-    sa.Column('longitude', sa.Float(), nullable=False),
     sa.Column('latitude', sa.Float(), nullable=False),
+    sa.Column('longitude', sa.Float(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
