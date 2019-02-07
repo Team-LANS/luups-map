@@ -1,7 +1,7 @@
 """Model for restaurants, bars and event locations that accept vouchers."""
 
 from luupsmap import db
-from luupsmap.model.enums import VenueType
+from luupsmap.model import VenueType
 
 
 class Venue(db.Model):
