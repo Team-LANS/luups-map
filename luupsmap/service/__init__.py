@@ -1,6 +1,11 @@
+from luupsmap.service.venue_service import *
+
+
+# DECORATORS
+
 def as_dto(dto_class):
     def decorate(func):
-        def convert_to_dto(*args, **kwargs):
+        def convert_to_dto(args, kwargs):
             result = func(*args, **kwargs)
 
             # handle list/tuple
@@ -11,4 +16,5 @@ def as_dto(dto_class):
             return dto_class(result) if result else None
 
         return convert_to_dto
+
     return decorate

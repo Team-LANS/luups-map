@@ -1,7 +1,7 @@
 """Venue Dtos."""
 
 
-class VenueDto:
+class VenueDto(object):
     """Short venue dto containing only the most important attributes."""
     __slots__ = 'id', 'name', 'venue_type', 'homepage', 'address', 'latitude', 'longitude'
 

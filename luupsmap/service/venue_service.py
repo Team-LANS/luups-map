@@ -1,6 +1,6 @@
 from dto.venue_dto import VenueDto, VenueDetailDto
 from luupsmap import db
-from model.venue import Venue
+from luupsmap.model import Venue
 from service import as_dto
 
 
