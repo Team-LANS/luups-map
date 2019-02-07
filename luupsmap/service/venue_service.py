@@ -1,4 +1,4 @@
-from model import db
+from luupsmap import db
 from model.venue import Venue
 
 

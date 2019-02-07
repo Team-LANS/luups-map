@@ -6,7 +6,7 @@ from sqlalchemy import text
 from luupsmap import app, db
 
 from luupsmap.model.venue import Venue
-from luupsmap.model.enum.venue_type import VenueType
+from luupsmap.model.enums import VenueType
 
 db_utils = AppGroup('data')
 
