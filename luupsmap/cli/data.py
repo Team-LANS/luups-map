@@ -3,9 +3,9 @@ import os
 from flask.cli import AppGroup, with_appcontext
 from sqlalchemy import text
 
-from cli.commands.update_data import update_data
 from luupsmap import app, db
 from luupsmap.model import Venue
+from luupsmap.cli.commands.update_data import update_data
 
 LINE_LENGTH = 25
 
