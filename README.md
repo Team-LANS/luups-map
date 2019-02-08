@@ -38,8 +38,8 @@ needs to be created manually.
 
 After changing the model create migrations and upgrade the database using:
 
-```bash
-flask db migrate
+```
+flask db migrate -m <descriptive-message>
 flask db upgrade
 ```
 
