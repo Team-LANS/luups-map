@@ -70,8 +70,9 @@ def fetch_location(adress):
 
 # Straight up stolen from:
 # https://stackoverflow.com/questions/20025235/how-to-pretty-print-a-csv-file-in-python
+# noinspection PyIncorrectDocstring
 def pretty_file(filename, **options):
-    '''
+    """
     @summary:
         Reads a CSV file and prints visually the data as table to a new file.
     @param filename:
@@ -108,7 +109,7 @@ def pretty_file(filename, **options):
         defines how the rows of the table will be separated (default '\n')
     @param new_filename:
         the new file's filename (*default* '/new_' + filename)
-    '''
+    """
 
     # function specific options
     new_delimiter = options.pop('new_delimiter', ' | ')
@@ -146,7 +147,8 @@ def pretty_file(filename, **options):
                     column_max_width[col_number] = width
 
     max_columns = max(
-        column_max_width.keys()) + 1  # the max number of columns (having rows with different number of columns is no problem)
+        # the max number of columns (having rows with different number of columns is no problem)
+        column_max_width.keys()) + 1
 
     if max_columns > 1:
         total_length = sum(column_max_width.values()) + len(new_delimiter) * (max_columns - 1)

@@ -49,8 +49,9 @@ To seed the database with data run:
 flask data seed
 ```
 
-Seed data is generated from `data/venues.csv`. Venues must be added manually to this CSV. In order to retrieve
-the geo-locations of new venues run 
+Seed data is generated from `data/venues.sql`, which in turn can be generated from `data/venues.csv` using 
+[convertcsv.com](http://convertcsv.com/csv-to-sql.htm). Venues must be added manually to this CSV. In order to retrieve
+the geo-locations of new venues and add them to the CSV run:
 
 ```bash
 flask data update
