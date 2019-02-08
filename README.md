@@ -27,7 +27,6 @@ SECRET_KEY=<application-key>
 
 DB_USER = <db-user>
 DB_PW = <db-password>
-DB_NAME = <db-name>
 
 GMAPS_API_KEY=<api-key>
 ```
@@ -44,8 +43,15 @@ flask db migrate
 flask db upgrade
 ```
 
-To seed the database with data run
+To seed the database with data run:
 
 ```bash
 flask data seed
+```
+
+Seed data is generated from `data/venues.csv`. Venues must be added manually to this CSV. In order to retrieve
+the geo-locations of new venues run 
+
+```bash
+flask data update
 ```
