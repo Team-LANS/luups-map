@@ -3,25 +3,34 @@ import os
 from flask.cli import AppGroup, with_appcontext
 from sqlalchemy import text
 
+from cli.commands.update_data import update_data
 from luupsmap import app, db
 from luupsmap.model import Venue
 
 LINE_LENGTH = 25
 
-db_utils = AppGroup('data')
+data = AppGroup('data')
 
 
-@db_utils.command('seed')
+@data.command('seed')
 @with_appcontext
 def seed():
     remove_data()
     seed_data()
 
 
-@db_utils.command('reset')
+@data.command('reset')
 @with_appcontext
 def reset():
     remove_data()
+
+
+@data.command('update')
+@with_appcontext
+def update():
+    path = os.path.abspath(os.path.dirname(__file__))
+    infile = os.path.join(path, '..', '..', 'data', 'venues.csv')
+    update_data(infile)
 
 
 def remove_data():
@@ -43,4 +52,4 @@ def seed_data():
     print('Done')
 
 
-app.cli.add_command(db_utils)
+app.cli.add_command(data)
