@@ -1,3 +1,4 @@
+// TODO update
 const VENUE_TYPES = {
   RESTAURANT: 'RESTAURANT',
   BAR: 'BAR',
@@ -10,6 +11,17 @@ const VIENNA_COORDS = {
 };
 
 const DEFAULT_ZOOM = 15;
+
+const MAP_OPTIONS = {
+  center: VIENNA_COORDS,
+  zoom: DEFAULT_ZOOM,
+  zoomControl: false,
+  mapTypeControl: false,
+  scaleControl: false,
+  streetViewControl: false,
+  rotateControl: false,
+  fullscreenControl: false
+};
 
 let map;  // the map object
 
@@ -34,9 +46,5 @@ addMarker = (type, position) => {
 };
 
 initMap = () => {
-  const options = {
-    center: VIENNA_COORDS,
-    zoom: DEFAULT_ZOOM
-  };
-  map = new google.maps.Map(getMapContainer(), options);
+  map = new google.maps.Map(getMapContainer(), MAP_OPTIONS);
 };
