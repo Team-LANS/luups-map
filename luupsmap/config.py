@@ -11,7 +11,7 @@ class Config(object):
     # DB
     DB_USER = os.getenv('DB_USER')
     DB_PW = os.getenv('DB_PW')
-    DB_NAME = None
+    DB_NAME = 'luups_map_dev'
     SQLALCHEMY_DATABASE_URI = 'postgresql://{user}:{pw}@{address}/{db}'.format(
         user=DB_USER,
         pw=DB_PW,

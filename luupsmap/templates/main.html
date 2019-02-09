@@ -26,9 +26,15 @@
   <section id="map" class="map"></section>
 
   <!-- GOOGLE MAPS -->
-  <script src="https://maps.googleapis.com/maps/api/js?key={{ config.GMAPS_API_KEY }}&callback=initMap"
-          async
-          defer>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ config.GMAPS_API_KEY }}"></script>
+  <script>
+    initMap();
+    {% for venue in venues %}
+      addMarker('{{ venue.venue_type }}', {
+        lat: {{ venue.latitude }},
+        lng: {{ venue.longitude }}
+      });
+    {% endfor %}
   </script>
 </main>
 

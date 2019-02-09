@@ -5,7 +5,7 @@ from luupsmap.service.venue_service import *
 
 def as_dto(dto_class):
     def decorate(func):
-        def convert_to_dto(args, kwargs):
+        def convert_to_dto(*args, **kwargs):
             result = func(*args, **kwargs)
 
             # handle list/tuple

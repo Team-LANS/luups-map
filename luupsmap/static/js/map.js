@@ -39,5 +39,4 @@ initMap = () => {
     zoom: DEFAULT_ZOOM
   };
   map = new google.maps.Map(getMapContainer(), options);
-  const marker = addMarker('VENUE', VIENNA_COORDS);
 };

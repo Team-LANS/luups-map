@@ -3,12 +3,12 @@
 
 class VenueDto(object):
     """Short venue dto containing only the most important attributes."""
-    __slots__ = 'id', 'name', 'venue_type', 'homepage', 'address', 'latitude', 'longitude'
+    __slots__ = 'id', 'name', 'venue_type', 'homepage', 'address', 'latitude', 'longitude', '__dict__'
 
     def __init__(self, venue):
         self.id = venue.id
         self.name = venue.name
-        self.venue_type = venue.venue_type
+        self.venue_type = venue.venue_type.value
         self.homepage = venue.homepage
         self.address = venue.address
         self.latitude = venue.latitude
