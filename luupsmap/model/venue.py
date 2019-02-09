@@ -1,7 +1,6 @@
-"""Model for restaurants, bars and event locations that accept vouchers."""
+"""A Model for restaurants, bars and event locations that accept vouchers."""
 
 from luupsmap import db
-from luupsmap.model import VenueType
 
 
 class Venue(db.Model):
@@ -9,27 +8,27 @@ class Venue(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), nullable=False)
-    description = db.Column(db.Text())
+    description = db.Column(db.Text)
     homepage = db.Column(db.String(64))
     email = db.Column(db.String(64))
     phone = db.Column(db.String(32))
-    venue_type = db.Column(db.Enum(VenueType), nullable=True)
-    opening_hours = db.Column(db.Text())
-    address = db.Column(db.String(256), nullable=False)
-    latitude = db.Column(db.Float(), nullable=False)
-    longitude = db.Column(db.Float(), nullable=False)
+    opening_hours = db.Column(db.Text)
 
-    def __init__(self, name, description, venue_type, homepage, email, phone, opening_hours, address):
-        self.name = name
-        self.description = description
-        self.venue_type = venue_type
-        self.homepage = homepage
-        self.email = email
-        self.phone = phone
-        self.opening_hours = opening_hours
-        self.address = address
-        self.latitude = 0.0
-        self.longitude = 0.0
+    # relationships
+    vouchers = db.relationship('Voucher')
+    locations = db.relationship('Location')
+
+    def __init__(self, data):
+        self.id = data.id
+        self.name = data.name
+        self.description = data.description
+        self.homepage = data.homepage
+        self.email = data.email
+        self.phone = data.phone
+        self.opening_hours = data.opening_hours
+
+        self.vouchers = data.vouchers
+        self.locations = data.locations
 
     def __repr__(self):
-        return '[Venue "{}" ({})]'.format(self.name, repr(self.venue_type))
+        return '<VENUE "{}">'.format(self.name)

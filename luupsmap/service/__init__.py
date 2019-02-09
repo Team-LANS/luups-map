@@ -1,8 +1,4 @@
-from luupsmap.service.venue_service import *
-
-
 # DECORATORS
-
 def as_dto(dto_class):
     def decorate(func):
         def convert_to_dto(*args, **kwargs):
@@ -18,3 +14,6 @@ def as_dto(dto_class):
         return convert_to_dto
 
     return decorate
+
+
+from luupsmap.service.venue_service import *

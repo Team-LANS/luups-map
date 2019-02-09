@@ -30,10 +30,12 @@
   <script>
     initMap();
     {% for venue in venues %}
-      addMarker('{{ venue.venue_type }}', {
-        lat: {{ venue.latitude }},
-        lng: {{ venue.longitude }}
-      });
+      {% for location in venue.locations %}
+        addMarker('RESTAURANT', {
+          lat: {{ location.latitude }},
+          lng: {{ location.longitude }}
+        });
+      {% endfor %}
     {% endfor %}
   </script>
 </main>

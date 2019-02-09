@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
-import luupsmap.model.venue
+from luupsmap.model import *
 
 import luupsmap.views
 
