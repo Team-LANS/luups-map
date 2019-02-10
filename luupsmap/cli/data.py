@@ -4,7 +4,7 @@ from flask.cli import AppGroup, with_appcontext
 
 from luupsmap import app, db
 from luupsmap.model import Venue
-from luupsmap.cli.commands.update_data import update_data
+from luupsmap.cli.commands.update_locations import update_locations
 from luupsmap.cli.commands.seed import SeedCommand
 
 LINE_LENGTH = 25
@@ -32,7 +32,7 @@ def reset():
 def update():
     path = os.path.abspath(os.path.dirname(__file__))
     infile = os.path.join(path, '..', '..', 'data', 'venues.csv')
-    update_data(infile)
+    update_locations(infile)
 
 
 def remove_data():

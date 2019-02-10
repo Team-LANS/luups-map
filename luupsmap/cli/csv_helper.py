@@ -1,32 +1,6 @@
 import csv
 import os
 import re
-from tempfile import NamedTemporaryFile
-
-import googlemaps
-
-from luupsmap import app
-
-LINE_LENGTH = 25
-
-
-def update_data(file):
-    print('Preprocessing data file...'.ljust(LINE_LENGTH), end=' ')
-    processed_file = NamedTemporaryFile(delete=False)
-    strip_whitepace(file, processed_file)
-    print('Done')
-    updated_file = NamedTemporaryFile(delete=False)
-    print('Adding missing coordinates...'.ljust(LINE_LENGTH))
-    fetch_locations(processed_file, updated_file)
-
-    print('Updating existing file...'.ljust(LINE_LENGTH), end=' ')
-    # TODO: Sort the data too
-    pretty_file(updated_file.name,
-                header=False,
-                border=False,
-                delimiter='|',
-                new_filename=file)
-    print('Done')
 
 
 def strip_whitepace(infile, outfile):
@@ -37,35 +11,12 @@ def strip_whitepace(infile, outfile):
             outfile.write(line)
 
 
-def fetch_locations(infile, outfile):
-    with open(infile.name, 'r') as infile:
-        reader = csv.DictReader(infile, delimiter='|')
-        with open(outfile.name, 'w') as outfile:
-            writer = csv.DictWriter(outfile, fieldnames=reader.fieldnames, delimiter='|')
-            writer.writeheader()
-            for row in reader:
-                add_missing_coordinates(row)
-                writer.writerow(row)
-
-
-def add_missing_coordinates(row):
-    coordinates_missing = row['latitude'] in (None, '') or row['longitude'] in (None, '')
-    address = row['address']
-    if coordinates_missing and address not in (None, ''):
-        [latitude, longitude] = fetch_location(address)
-        row['latitude'] = latitude
-        row['longitude'] = longitude
-        change = '%s : %s, %s' % (row['name'], latitude, longitude)
-        print(' ' * 4 + change)
-
-
-def fetch_location(adress):
-    gmaps_api_key = app.config['GMAPS_API_KEY']
-    gmaps = googlemaps.Client(key=gmaps_api_key)
-    geocode_result = gmaps.geocode(adress)
-    for res in geocode_result:
-        coords = res['geometry']['location']
-        return [coords['lat'], coords['lng']]
+def _strip_whitepace(infile, outfile):
+    with open(infile, 'r') as infile, open(outfile.name, 'w') as outfile:
+        for line in infile:
+            line = re.sub(r'\|\s*', '|', line)
+            line = re.sub(r'\s*\|', '|', line)
+            outfile.write(line)
 
 
 # Straight up stolen from:
@@ -170,7 +121,8 @@ def pretty_file(filename, **options):
                             row[index] = row[index] + ' ' * diff  # append spaces to fit the max width
 
                     if row_number == 0 and border is True:  # draw top border
-                        output.write(border_corner_tl + border_horizontal * total_length + border_corner_tr + newline)
+                        output.write(
+                            border_corner_tl + border_horizontal * total_length + border_corner_tr + newline)
                     output.write(left + new_delimiter.join(row) + right + newline)  # print the new row
                     if row_number == 0 and header is True:  # draw header's separator
                         output.write(left_header + border_header_separator * total_length + right_header + newline)
