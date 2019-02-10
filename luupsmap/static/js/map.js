@@ -1,10 +1,3 @@
-// TODO update
-const VENUE_TYPES = {
-  RESTAURANT: 'RESTAURANT',
-  BAR: 'BAR',
-  VENUE: 'VENUE'
-};
-
 const VIENNA_COORDS = {
   lat: 48.208176,
   lng: 16.373819
@@ -31,7 +24,7 @@ getMapContainer = () => document.getElementById('map');
 
 getMarkerIcon = (type) => {
   return {
-    url: `${location.href}static/svg/marker/${VENUE_TYPES[type]}.svg`,
+    url: `${location.href}static/svg/marker/${type}.svg`,
     scaledSize: new google.maps.Size(45, 45)
   }
 };

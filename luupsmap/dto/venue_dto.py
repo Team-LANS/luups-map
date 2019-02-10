@@ -5,7 +5,7 @@ from luupsmap.dto import VoucherDto, LocationDto
 
 class VenueDto(object):
     """Short venue dto containing only the most important attributes."""
-    __slots__ = 'id', 'name', 'homepage', 'vouchers', 'locations'
+    __slots__ = 'id', 'name', 'homepage', 'vouchers', 'locations', 'type'
 
     def __init__(self, data):
         self.id = data.id
@@ -14,6 +14,8 @@ class VenueDto(object):
 
         self.vouchers = [VoucherDto(voucher) for voucher in data.vouchers] if data.vouchers else []
         self.locations = [LocationDto(location) for location in data.locations] if data.locations else []
+
+        self.type = 0
 
 
 class VenueDetailDto(VenueDto):

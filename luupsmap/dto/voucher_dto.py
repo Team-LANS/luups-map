@@ -8,8 +8,8 @@ class VoucherDto(object):
         self.id = data.id
         self.id_venue = data.id_venue
         self.description = data.description
-        self.voucher_types = [entry.type.value for entry in data.voucher_types] if data.voucher_types else []
-        self.voucher_tags = [entry.tag.value for entry in data.voucher_tags] if data.voucher_tags else []
+        self.voucher_types = [entry.type for entry in data.voucher_types] if data.voucher_types else []
+        self.voucher_tags = [entry.tag for entry in data.voucher_tags] if data.voucher_tags else []
 
 
 class VoucherTypeDto(object):

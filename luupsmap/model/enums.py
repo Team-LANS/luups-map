@@ -2,12 +2,17 @@ from enum import Enum
 
 
 class Type(Enum):
-    FOOD = 'FOOD'
-    DRINK = 'DRINK'
-    TICKET = 'TICKET'
+    FOOD = 1
+    DRINK = 2
+    TICKET = 4
 
     def __repr__(self):
-        return self.value.lower()
+        return self.name.lower()
+
+    @classmethod
+    def value_sum(cls):
+        """Calculate the sum of all values."""
+        return 2 ** len(cls.__members__.keys()) - 1
 
 
 class Tag(Enum):
