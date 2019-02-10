@@ -16,19 +16,23 @@ class Venue(db.Model):
 
     # relationships
     vouchers = db.relationship('Voucher')
-    locations = db.relationship('Location')
 
     def __init__(self, data):
-        self.id = data.id
-        self.name = data.name
-        self.description = data.description
-        self.homepage = data.homepage
-        self.email = data.email
-        self.phone = data.phone
-        self.opening_hours = data.opening_hours
+        self.name = data['name']
+        self.description = data['description']
+        self.homepage = data['homepage']
+        self.email = data['email']
+        self.phone = data['phone']
+        self.opening_hours = data['opening_hours']
 
-        self.vouchers = data.vouchers
-        self.locations = data.locations
+        self.vouchers = data['vouchers']
+        self.locations = data['locations']
+
+    def add_voucher(self, voucher):
+        self.vouchers.append(voucher)
+
+    def add_location(self, location):
+        self.vouchers.append(location)
 
     def __repr__(self):
         return '<VENUE "{}">'.format(self.name)

@@ -1,4 +1,5 @@
 """A model for venue locations."""
+from sqlalchemy.orm import relationship
 
 from luupsmap import db
 
@@ -12,12 +13,13 @@ class Location(db.Model):
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
 
+    venue = relationship("Venue", backref="locations")
+
     def __init__(self, data):
-        self.id = data.id
-        self.id_venue = data.id_venue
-        self.address = data.address
-        self.latitude = data.latitude
-        self.longitude = data.longitude
+        self.address = data['address']
+        self.latitude = data['latitude']
+        self.longitude = data['longitude']
+        self.venue = data['venue']
 
     def __repr__(self):
         return '<LOCATION "{}">'.format(self.address)

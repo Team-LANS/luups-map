@@ -1,18 +1,16 @@
 import csv
-import os
-import re
 from tempfile import NamedTemporaryFile
 
 import googlemaps
-from sqlalchemy import text
 
-from cli.csv_helper import strip_whitepace, pretty_file
-from luupsmap import app, db
+from luupsmap.cli.csv_helper import strip_whitepace, pretty_file
+from luupsmap import app
 
 LINE_LENGTH = 25
 
 
 class UpdateLocationsCommand:
+
     def __init__(self, address_file):
         self.address_file = address_file
 

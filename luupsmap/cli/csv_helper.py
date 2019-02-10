@@ -11,14 +11,6 @@ def strip_whitepace(infile, outfile):
             outfile.write(line)
 
 
-def _strip_whitepace(infile, outfile):
-    with open(infile, 'r') as infile, open(outfile.name, 'w') as outfile:
-        for line in infile:
-            line = re.sub(r'\|\s*', '|', line)
-            line = re.sub(r'\s*\|', '|', line)
-            outfile.write(line)
-
-
 # Straight up stolen from:
 # https://stackoverflow.com/questions/20025235/how-to-pretty-print-a-csv-file-in-python
 # noinspection PyIncorrectDocstring
