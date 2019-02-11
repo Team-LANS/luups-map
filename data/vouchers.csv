@@ -1,7 +1,7 @@
-Name             | Type             | Text                                       | Limitations
-Allergiker Café  | Essen            | Zweites Stück Kuchen gratis                |
-Kaffeemodul      | Trinken          | Zweiter Kaffee gratis                      |
-Bao Bar          | Essen            | Zweite Bao Box Gratis                      |
-Kaffemik         | Trinken          | Zweiter Kaffee gratis                      |
-Top Kino         | Freizeit/Kultur  | Zweiter Eintritt gratis                    |
-Wiener Riesenrad | Freizeit/Kulator | 1 Euro Erm. auf ein reg. Erwachsenenticket |
+name             | description                                | limitations | voucher_tags       | voucher_types
+Allergiker Café  | Zweites Stück Kuchen gratis                |             | COMBINATION,COFFEE | FOOD
+Kaffeemodul      | Zweiter Kaffee gratis                      |             | COFFEE             | DRINK
+Bao Bar          | Zweite Bao Box Gratis                      |             | MAIN_COURSE        | FOOD
+Kaffemik         | Zweiter Kaffee gratis                      |             | COFFEE             | DRINK
+Top Kino         | Zweiter Eintritt gratis                    |             | TICKET             | TICKET
+Wiener Riesenrad | 1 Euro Erm. auf ein reg. Erwachsenenticket |             | TICKET             | TICKET

@@ -4,7 +4,7 @@ from flask.cli import AppGroup, with_appcontext
 
 from luupsmap.cli.commands import SeedCommand, UpdateLocationsCommand
 from luupsmap import app, db
-from luupsmap.model import Venue, Location, Voucher
+from luupsmap.model import Venue, Location, Voucher, VoucherType, VoucherTag
 
 LINE_LENGTH = 25
 
@@ -28,6 +28,12 @@ def reset():
     remove_data()
 
 
+@data.command('nuke')
+@with_appcontext
+def reset():
+    nuke()
+
+
 @data.command('update-locations')
 @with_appcontext
 def update():
@@ -36,13 +42,29 @@ def update():
     UpdateLocationsCommand(infile).run()
 
 
+# noinspection SqlWithoutWhere
 def remove_data():
     # TODO: Use logger
     print('Removing existing data...'.ljust(LINE_LENGTH), end=' ')
     session = db.session
-    session.query(Location).delete()
+    session.query(VoucherTag).delete()
+    session.query(VoucherType).delete()
     session.query(Voucher).delete()
+    session.query(Location).delete()
     session.query(Venue).delete()
+    session.commit()
+    print('Done')
+
+
+def nuke():
+    print('Dropping all tables and removing types...'.ljust(LINE_LENGTH), end=' ')
+    session = db.session
+    VoucherTag.__table__.drop(db.engine)
+    VoucherType.__table__.drop(db.engine)
+    Location.__table__.drop(db.engine)
+    Voucher.__table__.drop(db.engine)
+    Venue.__table__.drop(db.engine)
+    session.execute('DROP TABLE alembic_version')
     session.commit()
     print('Done')
 

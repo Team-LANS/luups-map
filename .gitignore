@@ -105,3 +105,6 @@ venv.bak/
 
 # intellij
 .idea/
+
+# direnv
+.envrc

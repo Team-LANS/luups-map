@@ -37,4 +37,4 @@ class Tag(Enum):
     SEASONAL = 'SEASONAL'
 
     def __repr__(self):
-        return self.value.lower()
+        return self.name.lower()

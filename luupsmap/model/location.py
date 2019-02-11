@@ -13,8 +13,6 @@ class Location(db.Model):
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
 
-    venue = relationship("Venue", backref="locations")
-
     def __init__(self, data):
         self.address = data['address']
         self.latitude = data['latitude']

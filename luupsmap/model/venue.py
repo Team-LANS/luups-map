@@ -14,8 +14,8 @@ class Venue(db.Model):
     phone = db.Column(db.String(32))
     opening_hours = db.Column(db.Text)
 
-    # relationships
-    vouchers = db.relationship('Voucher')
+    locations = db.relationship("Location", backref="venue")
+    vouchers = db.relationship("Voucher", backref="venue")
 
     def __init__(self, data):
         self.name = data['name']
@@ -32,7 +32,7 @@ class Venue(db.Model):
         self.vouchers.append(voucher)
 
     def add_location(self, location):
-        self.vouchers.append(location)
+        self.locations.append(location)
 
     def __repr__(self):
         return '<VENUE "{}">'.format(self.name)
