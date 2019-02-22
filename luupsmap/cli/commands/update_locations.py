@@ -15,7 +15,7 @@ class UpdateLocationsCommand:
         self.address_file = address_file
 
     def run(self):
-        print('Preprocessing data file...'.ljust(LINE_LENGTH), end=' ')
+        print('Preprocessing address file...'.ljust(LINE_LENGTH), end=' ')
         processed_file = NamedTemporaryFile(delete=False)
         strip_whitepace(self.address_file, processed_file)
         print('Done')

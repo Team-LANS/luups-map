@@ -2,7 +2,7 @@ import os
 
 from flask.cli import AppGroup, with_appcontext
 
-from luupsmap.cli.commands import SeedCommand, UpdateLocationsCommand
+from luupsmap.cli.commands import SeedCommand, UpdateLocationsCommand, UpdateAddressesCommand
 from luupsmap import app, db
 from luupsmap.model import Venue, Location, Voucher, VoucherType, VoucherTag
 
@@ -40,6 +40,15 @@ def update():
     path = os.path.abspath(os.path.dirname(__file__))
     infile = os.path.join(path, '..', '..', 'data', 'locations.csv')
     UpdateLocationsCommand(infile).run()
+
+
+@data.command('update-addresses')
+@with_appcontext
+def update():
+    path = os.path.abspath(os.path.dirname(__file__))
+    locations = os.path.join(path, '..', '..', 'data', 'locations.csv')
+    venues = os.path.join(path, '..', '..', 'data', 'venues.csv')
+    UpdateAddressesCommand(locations_file=locations, venues_file=venues).run()
 
 
 # noinspection SqlWithoutWhere
