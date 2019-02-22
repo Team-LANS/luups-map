@@ -17,7 +17,10 @@ class Venue(db.Model):
     locations = db.relationship("Location", backref="venue")
     vouchers = db.relationship("Voucher", backref="venue")
 
-    def __init__(self, data):
+    def __init__(self, data=None):
+        if data is None:
+            return
+
         self.name = data['name']
         self.description = data['description']
         self.homepage = data['homepage']

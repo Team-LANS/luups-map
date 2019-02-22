@@ -25,6 +25,11 @@ class VenueService:
     def get(self, venue_id):
         return self.db_session.query(Venue).get(venue_id)
 
+    @as_dto(VenueDto)
+    def create(self, venue):
+        self.db_session.add(venue)
+        return self.db_session.commit()
+
     @staticmethod
     def __determine_type(vouchers):
         types = {voucher_type for voucher in vouchers for voucher_type in voucher.voucher_types}

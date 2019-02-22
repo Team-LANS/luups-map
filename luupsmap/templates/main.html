@@ -1,53 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "index.html" %}
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/furtive/furtive.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
-
-  <!-- JS -->
-  <script src="{{ url_for('static', filename='js/map.js') }}"></script>
-
-  <title>Hello!</title>
-  <!-- TODO add favicon here -->
-</head>
-<body class="bg--off-white fnt--dark-gray">
-
-<header class="bg--white fnt--dark-gray">
-  <section class="p1">
-    <span class="h4">LUUPS-MAP</span>
-  </section>
-</header>
-
-<main>
-  <section id="map" class="map"></section>
-
-  <!-- GOOGLE MAPS -->
-  <script src="https://maps.googleapis.com/maps/api/js?key={{ config.GMAPS_API_KEY }}"></script>
-  <script>
-    initMap();
-    {% for venue in venues %}
-      {% set venue_type = venue.type %}
-      {% for location in venue.locations %}
-        addMarker({{ venue_type }}, {
-          lat: {{ location.latitude }},
-          lng: {{ location.longitude }}
-        });
-      {% endfor %}
+{% block content %}
+<!-- GOOGLE MAPS -->
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config.GMAPS_API_KEY }}"></script>
+<script>
+  initMap();
+  {% for venue in venues %}
+    {% set venue_type = venue.type %}
+    {% for location in venue.locations %}
+      addMarker({{ venue_type }}, {
+        lat: {{ location.latitude }},
+        lng: {{ location.longitude }}
+      });
     {% endfor %}
-  </script>
-</main>
-
-<footer>
-  <section class="txt--center">
-    <small>
-      Made with ❤ by <a href="https://github.com/Team-LANS">Team LANS</a>
-    </small>
-  </section>
-</footer>
-
-</body>
-</html>
+  {% endfor %}
+</script>
+{% endblock %}
