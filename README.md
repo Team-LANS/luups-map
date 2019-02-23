@@ -49,10 +49,14 @@ To seed the database with data run:
 flask data seed
 ```
 
-Seed data is generated from `data/venues.sql`, which in turn can be generated from `data/venues.csv` using 
-[convertcsv.com](http://convertcsv.com/csv-to-sql.htm). Venues must be added manually to this CSV. In order to retrieve
-the geo-locations of new venues and add them to the CSV run:
+
+Seed data is taken from the csv files in `data`. These files need to be edited manually, however some data can be auto-completed
+using the [Google Place API](https://developers.google.com/places/web-service/intro) by running: 
 
 ```bash
 flask data update
 ```
+
+This will update the CSV with missing location data and venue data. For more information see [update.py](/luupsmap/cli/commands/update.py)
+
+

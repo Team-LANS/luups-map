@@ -1,84 +1,90 @@
-import csv
-from tempfile import NamedTemporaryFile
-
 from luupsmap import db
-from luupsmap.cli.csv_helper import strip_whitepace
+from luupsmap.cli.util import CsvFile
 from luupsmap.model import Venue, Location, Voucher, VoucherType, VoucherTag, Type, Tag
-
-LINE_LENGTH = 25
 
 
 class SeedCommand:
+    venues = []
+    locations = {}
+    vouchers = {}
 
     def __init__(self, venues_file, locations_file, vouchers_file):
-        self.venues_file = venues_file
-        self.locations_file = locations_file
-        self.vouchers_file = vouchers_file
+        self.venues_file = CsvFile(venues_file, ['name', 'homepage', 'email', 'phone', 'opening_hours', 'description'])
+        self.locations_file = CsvFile(locations_file, ['name', 'address', 'latitude', 'longitude'])
+        self.vouchers_file = CsvFile(vouchers_file,
+                                     ['name', 'description', 'limitations', 'voucher_tags', 'voucher_types'])
 
     def run(self):
-        print('Start seeding tables...'.ljust(LINE_LENGTH), end=' ')
-        processed_venues_file = NamedTemporaryFile(delete=False)
-        strip_whitepace(self.venues_file, processed_venues_file)
-        venues = self._load_venues()
-        locations = self._load_locations(venues)
-        vouchers = self._load_vouchers(venues)
-        db.session.add_all(venues.values())
+        print('Start seeding tables...'.ljust(25), end=' ')
+        self.venues = self.venues_file.load()
+        self._load_locations()
+        self._load_vouchers()
+        self._create_and_save_models()
+        print('Done')
+
+    def _load_locations(self):
+        locations = self.locations_file.load()
+        for location in locations:
+            name = location['name']
+            self.locations.setdefault(name, []).append(location)
+
+    def _load_vouchers(self):
+        vouchers = self.vouchers_file.load()
+        for voucher in vouchers:
+            name = voucher['name']
+            self.vouchers.setdefault(name, []).append(voucher)
+
+    def _create_and_save_models(self):
+        venues = []
+        locations = []
+        vouchers = []
+        for venue in self.venues:
+            venue['vouchers'] = []
+            venue['locations'] = []
+            venue = Venue(venue)
+            self._create_locations(venue, locations)
+            self._create_vouchers(venue, vouchers)
+        db.session.add_all(venues)
         db.session.add_all(locations)
         db.session.add_all(vouchers)
         db.session.commit()
 
-        print('Done')
+    def _create_locations(self, venue, locations):
+        name = venue.name
+        if name not in self.locations:
+            return
+        for location in self.locations[name]:
+            location['venue'] = venue
+            location = Location(location)
+            venue.locations.append(location)
+            locations.append(location)
 
-    def _load_venues(self):
-        processed_venues_file = NamedTemporaryFile(delete=False)
-        strip_whitepace(self.venues_file, processed_venues_file)
-        venues = {}
-        with open(processed_venues_file.name, 'r') as venues_file:
-            reader = csv.DictReader(venues_file, delimiter='|')
-            for row in reader:
-                row['locations'] = []
-                row['vouchers'] = []
-                venue = Venue(row)
-                venues[row['name']] = venue
-        return venues
-
-    def _load_locations(self, venues):
-        processed_locations_file = NamedTemporaryFile(delete=False)
-        strip_whitepace(self.locations_file, processed_locations_file)
-        locations = []
-        with open(processed_locations_file.name, 'r') as venues_file:
-            reader = csv.DictReader(venues_file, delimiter='|')
-            for row in reader:
-                venue = venues[row['name']]
-                row['venue'] = venue
-                location = Location(row)
-                locations.append(location)
-        return locations
-
-    def _load_vouchers(self, venues):
-        processed_vouchers_file = NamedTemporaryFile(delete=False)
-        strip_whitepace(self.vouchers_file, processed_vouchers_file)
-        vouchers = []
-        with open(processed_vouchers_file.name, 'r') as venues_file:
-            reader = csv.DictReader(venues_file, delimiter='|')
-            for row in reader:
-                venue = venues[row['name']]
-                row['venue'] = venue
-                row['voucher_types'] = self._get_voucher_types(row)
-                row['voucher_tags'] = self._get_voucher_tags(row)
-                voucher = Voucher(row)
-                vouchers.append(voucher)
-        return vouchers
+    def _create_vouchers(self, venue, vouchers):
+        name = venue.name
+        if name not in self.vouchers:
+            return
+        for voucher in self.vouchers[name]:
+            self._convert_voucher_types(voucher)
+            self._convert_voucher_tags(voucher)
+            voucher['venue'] = venue
+            voucher = Voucher(voucher)
+            venue.vouchers.append(voucher)
+            vouchers.append(voucher)
 
     @staticmethod
-    def _get_voucher_types(row):
-        voucher_types = row['voucher_types'].split(',')
-        return [VoucherType(Type[voucher_type]) for voucher_type in voucher_types]
+    def _convert_voucher_types(voucher):
+        # In case we already converted string to proper types
+        if type(voucher['voucher_types']) == list:
+            return
+        voucher_types = voucher['voucher_types'].split(',')
+        voucher['voucher_types'] = [VoucherType(Type[voucher_type]) for voucher_type in voucher_types]
 
     @staticmethod
-    def _get_voucher_tags(row):
-        voucher_tags = row['voucher_tags'].split(',')
-        return [VoucherTag(Tag[voucher_tag]) for voucher_tag in voucher_tags]
+    def _convert_voucher_tags(voucher):
+        if type(voucher['voucher_tags']) == list:
+            return
+        voucher_tags = voucher['voucher_tags'].split(',')
+        voucher['voucher_tags'] = [VoucherTag(Tag[voucher_tag]) for voucher_tag in voucher_tags]
 
     def __repr__(self):
         return '[SeedCommand ({}, {}, {})]'.format(self.venues_file, self.locations_file, self.vouchers_file)

@@ -21,7 +21,7 @@ def pretty_file(filename, **options):
     @param filename:
         is the path to the given CSV file.
     @param **options:
-        the union of Python's Standard Library csv module Dialects and Formatting Parameters and the following list:
+        the union of Python's Standard Library util module Dialects and Formatting Parameters and the following list:
     @param new_delimiter:
         the new column separator (default ' | ')
     @param border:

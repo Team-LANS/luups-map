@@ -21,7 +21,6 @@ def seed():
     vouchers_file = os.path.join(path, '..', '..', 'data', 'vouchers.csv')
     SeedCommand(venues_file, locations_file, vouchers_file).run()
 
-
 @data.command('reset')
 @with_appcontext
 def reset():
