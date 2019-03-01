@@ -76,8 +76,8 @@ class UpdateCommand:
                     continue
                 name = location['name']
                 address = location['address']
-                details = self.place_cache.get(name)
-                geometry_location = details['geometry']['location']
+                detail = self.place_cache.get(name)[0]
+                geometry_location = detail['geometry']['location']
                 latitude, longitude = (geometry_location['lat'], geometry_location['lng'])
                 location['latitude'] = latitude
                 location['longitude'] = longitude
