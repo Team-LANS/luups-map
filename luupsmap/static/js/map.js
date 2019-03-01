@@ -29,12 +29,26 @@ getMarkerIcon = (type) => {
   }
 };
 
-addMarker = (type, position) => {
-  return new google.maps.Marker({
+addMarker = (venue, position) => {
+  let type = venue.type;
+  let marker = new google.maps.Marker({
     map,
     position,
     animation: google.maps.Animation.DROP,
     icon: getMarkerIcon(type)
+  });
+  marker.addListener('click', function () {
+    infoWindow(venue).open(map, marker);
+  });
+  return marker
+};
+
+infoWindow = (venue) => {
+  return new google.maps.InfoWindow({
+    content: `<div>
+                <p>Name: ${venue.name}</p>
+                <p>Homepage: ${venue.homepage}</p>
+            </div>`
   });
 };
 

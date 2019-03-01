@@ -1,0 +1,24 @@
+{% extends "index.jinja2" %}
+
+{% block content %}
+  <!-- GOOGLE MAPS -->
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ config.GMAPS_API_KEY }}"></script>
+  <script>
+    initMap();
+    {% for venue in venues %}
+      {% for location in venue.locations %}
+        {#TODO: Proper JSON serisalization#}
+        venue_dict = {
+          id: "{{ venue.id  }}",
+          name: "{{ venue.name | escape }}",
+          homepage: "{{ venue.homepage }}",
+          type: "{{ venue.type }}"
+        };
+        addMarker(venue_dict, {
+          lat: {{ location.latitude }},
+          lng: {{ location.longitude }}
+        });
+      {% endfor %}
+    {% endfor %}
+  </script>
+{% endblock %}
