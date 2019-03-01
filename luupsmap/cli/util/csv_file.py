@@ -1,7 +1,7 @@
 import csv
 from tempfile import NamedTemporaryFile
 
-from cli.util.csv_helper import strip_whitepace, pretty_file
+from luupsmap.cli.util.csv_helper import strip_whitepace, pretty_file
 
 
 class CsvFile:
@@ -34,4 +34,3 @@ class CsvFile:
                     border=False,
                     delimiter='|',
                     new_filename=self.file)
-

@@ -76,15 +76,20 @@ class SeedCommand:
         # In case we already converted string to proper types
         if type(voucher['voucher_types']) == list:
             return
-        voucher_types = voucher['voucher_types'].split(',')
+        voucher_types = [x.strip() for x in voucher['voucher_types'].split(',')]
         voucher['voucher_types'] = [VoucherType(Type[voucher_type]) for voucher_type in voucher_types]
 
     @staticmethod
     def _convert_voucher_tags(voucher):
+        # In case we already converted string to proper types
         if type(voucher['voucher_tags']) == list:
             return
-        voucher_tags = voucher['voucher_tags'].split(',')
+        if voucher['voucher_tags'] == '':
+            voucher['voucher_tags'] = []
+            return
+        voucher_tags = [x.strip() for x in voucher['voucher_tags'].split(',')]
         voucher['voucher_tags'] = [VoucherTag(Tag[voucher_tag]) for voucher_tag in voucher_tags]
 
-    def __repr__(self):
-        return '[SeedCommand ({}, {}, {})]'.format(self.venues_file, self.locations_file, self.vouchers_file)
+
+def __repr__(self):
+    return '[SeedCommand ({}, {}, {})]'.format(self.venues_file, self.locations_file, self.vouchers_file)
