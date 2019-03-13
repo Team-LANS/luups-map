@@ -66,3 +66,68 @@ footer a:hover {
 }
 
 /* MODAL  ****************************************************************************************************************/
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 300ms;
+  visibility: hidden;
+  opacity: 0;
+  z-index: -1;
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+}
+
+.popup {
+  margin: 30px auto;
+  padding: 10px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup .close {
+  right: 30px;
+  transition: all 200ms;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup .close:hover {
+  color: #06D85F;
+}
+
+.popup .content {
+  overflow: auto;
+}
+
+.popup .header {
+  height: 50px;
+  width: 100%;
+  top: 0
+}
+
+.popup .footer {
+  height: 50px;
+  width: 100%;
+  bottom: 0
+}
+@media screen and (max-width: 700px) {
+  .popup {
+    height: 90%;
+    width: 90%;
+  }
+}
+
+

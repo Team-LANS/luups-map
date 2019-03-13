@@ -2,14 +2,46 @@
 
 {% block header_controls %}
   <div class="media flt--right">
-    <img src="/static/svg/icons/magnifying_glass.svg" alt="Search">
+    <a class="cta" href="#popup">
+      <img src="/static/svg/icons/magnifying_glass.svg" alt="Search">
+    </a>
   </div>
 {% endblock %}
 
 {% block content %}
+  <div id="popup" class="overlay">
+    <div class="popup">
+      <a class="close flt--right " href="#">&times;</a>
+      <header class="header">
+      </header>
+      <div class="content">
+        <div class="content">
+          <h1>Sign In</h1>
+          <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+              {{ form.username.label }}<br>
+              {{ form.username(size=32) }}
+              {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+            </p>
+            <p>
+              {{ form.password.label }}<br>
+              {{ form.password(size=32) }}
+              {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+            </p>
+            <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+            <p ><a href="#"></a>{{ form.submit() }}</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   <section id="map" class="map">
     <div id="content"></div>
-
   </section>
   <!-- GOOGLE MAPS -->
   <script src="https://maps.googleapis.com/maps/api/js?key={{ config.GMAPS_API_KEY }}"></script>
