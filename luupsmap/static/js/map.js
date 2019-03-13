@@ -51,8 +51,12 @@ const openInfoWindow = (venue, marker) => {
   if (currentInfoWindow) {
     currentInfoWindow.close();
   }
+
+  const title = `<h5>${venue.name}</h5>`;
+  const links = createUrlLinks(venue.homepage);
+  const detailsLink = `<a>Details ></a>`;
   currentInfoWindow = new google.maps.InfoWindow({
-    content: `<article class="info-window"><h5>${venue.name}</h5>${createUrlLinks(venue.homepage)}</a></article>`
+    content: `<article class="info-window">${title}${links}<br>${detailsLink}</article>`
   });
   currentInfoWindow.open(map, marker);
 };
@@ -62,7 +66,7 @@ const createUrlLinks = (links) => {
 };
 
 const getUrlLink = (link) => {
-  const linkText = link.replace(/^(https?:\/\/)/,'').replace(/^(www\.)/,'').replace(/\/$/, '');
+  const linkText = link.replace(/^(https?:\/\/)/, '').replace(/^(www\.)/, '').replace(/\/$/, '');
   const url = link.startsWith('http') ? link : `http://${link}`;
 
   return `<a href="${url}">${linkText}</a>`;
