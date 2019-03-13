@@ -65,6 +65,20 @@ footer a:hover {
   height: 100%;
 }
 
+.info-window {
+  padding: 0.5rem;
+}
+
+.info-window > h5 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.gm-style-iw > .gm-ui-hover-effect {
+  top: -2px !important;
+  right: -2px !important;
+}
+
 /* MODAL  ****************************************************************************************************************/
 .overlay {
   position: absolute;

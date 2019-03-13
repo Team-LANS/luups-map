@@ -1,3 +1,6 @@
+'use strict';
+
+
 const VIENNA_COORDS = {
   lat: 48.208176,
   lng: 16.373819
@@ -17,19 +20,20 @@ const MAP_OPTIONS = {
 };
 
 let map;  // the map object
+let currentInfoWindow;
 
 // FUNCTIONS ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-getMapContainer = () => document.getElementById('map');
+const getMapContainer = () => document.getElementById('map');
 
-getMarkerIcon = (type) => {
+const getMarkerIcon = (type) => {
   return {
     url: `${location.href}static/svg/marker/${type}.svg`,
     scaledSize: new google.maps.Size(45, 45)
   }
 };
 
-addMarker = (venue, position) => {
+const addMarker = (venue, position) => {
   let type = venue.type;
   let marker = new google.maps.Marker({
     map,
@@ -37,21 +41,33 @@ addMarker = (venue, position) => {
     animation: google.maps.Animation.DROP,
     icon: getMarkerIcon(type)
   });
-  marker.addListener('click', function () {
-    infoWindow(venue).open(map, marker);
+  marker.addListener('click', () => {
+    openInfoWindow(venue, marker);
   });
-  return marker
+  return marker;
 };
 
-infoWindow = (venue) => {
-  return new google.maps.InfoWindow({
-    content: `<div>
-                <p>Name: ${venue.name}</p>
-                <p>Homepage: ${venue.homepage}</p>
-            </div>`
+const openInfoWindow = (venue, marker) => {
+  if (currentInfoWindow) {
+    currentInfoWindow.close();
+  }
+  currentInfoWindow = new google.maps.InfoWindow({
+    content: `<article class="info-window"><h5>${venue.name}</h5>${createUrlLinks(venue.homepage)}</a></article>`
   });
+  currentInfoWindow.open(map, marker);
 };
 
-initMap = () => {
+const createUrlLinks = (links) => {
+  return links.split(', ').map(link => getUrlLink(link)).join('<br>');
+};
+
+const getUrlLink = (link) => {
+  const linkText = link.replace(/^(https?:\/\/)/,'').replace(/^(www\.)/,'').replace(/\/$/, '');
+  const url = link.startsWith('http') ? link : `http://${link}`;
+
+  return `<a href="${url}">${linkText}</a>`;
+};
+
+const initMap = () => {
   map = new google.maps.Map(getMapContainer(), MAP_OPTIONS);
 };
