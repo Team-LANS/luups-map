@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+
+{% block header_controls %}
+{% endblock %}
+
+{% block content %}
+  <script>
+    venue_dict = {
+      id: "{{ venue.id  }}",
+      name: "{{ venue.name | escape }}",
+      homepage: "{{ venue.homepage }}",
+      type: "{{ venue.type }}"
+    };
+  </script>
+{% endblock %}
