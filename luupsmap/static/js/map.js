@@ -41,8 +41,9 @@ const addMarker = (venue, position) => {
     animation: google.maps.Animation.DROP,
     icon: getMarkerIcon(type)
   });
-  marker.addListener('click', () => {
+  marker.addListener('click', (e) => {
     openInfoWindow(venue, marker);
+    e.va.preventDefault();
   });
   return marker;
 };
@@ -54,7 +55,7 @@ const openInfoWindow = (venue, marker) => {
 
   const title = `<h5>${venue.name}</h5>`;
   const links = createUrlLinks(venue.homepage);
-  const details = `<form action="" method="post"><input class="btn--green btn--s" type="submit" name="${venue.id}" value="Details anzeigen"></form>`;
+  const details = `<a class="btn--green btn--s" href="${venue.href}">Details anzeigen</a>`;
   currentInfoWindow = new google.maps.InfoWindow({
     content: `<article class="info-window">${title}${links}<br>${details}</article>`
   });

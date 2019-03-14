@@ -54,7 +54,8 @@
           id: "{{ venue.id  }}",
           name: "{{ venue.name | escape }}",
           homepage: "{{ venue.homepage }}",
-          type: "{{ venue.type }}"
+          type: "{{ venue.type }}",
+          href: "{{ url_for('show_details', venue_id=venue.id) }}"
         };
         addMarker(venue_dict, {
           lat: {{ location.latitude }},
