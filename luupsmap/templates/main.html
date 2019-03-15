@@ -51,13 +51,13 @@
     initMap();
     {% for venue in venues %}
       {% for location in venue.locations %}
-        {#TODO: Proper JSON serisalization#}
+        {# TODO: Proper JSON serisalization #}
         venue_dict = {
-          id: "{{ venue.id  }}",
-          name: "{{ venue.name | escape }}",
-          homepage: "{{ venue.homepage }}",
-          type: "{{ venue.type }}",
-          href: "{{ url_for('show_details', venue_id=venue.id) }}"
+          id: '{{ venue.id  }}',
+          name: '{{ venue.name | escape }}',
+          homepage: '{{ venue.homepage }}',
+          type: '{{ venue.type }}',
+          href: '{{ url_for('show_details', venue_id=venue.id) }}'
         };
         addMarker(venue_dict, {
           lat: {{ location.latitude }},
