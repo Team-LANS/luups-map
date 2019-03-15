@@ -1,13 +1,13 @@
 /* FONTS **************************************************************************************************************/
-/* TODO use local font */
 @import url('https://fonts.googleapis.com/css?family=Amaranth:400,700|Open+Sans:300,400,700');
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .h1, .h2, .h3, .h4, h1, h2, h3, h4 {
-  font-family: "Amaranth", sans-serif;
+  font-family: 'Amaranth', sans-serif;
+  text-transform: uppercase;
 }
 
 .thin {
@@ -225,3 +225,26 @@ svg {
 svg.icon-small {
   height: 1.5rem;
 }
+
+/* HEADER *************************************************************************************************************/
+
+.heart {
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+  text-align: center;
+  margin-right: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+.city-name {
+  display: inline-block;
+  height: 1.6rem;
+  overflow: visible;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.3rem;
+  border-bottom: solid 5px #69D2AC;
+}
+

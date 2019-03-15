@@ -11,14 +11,18 @@
   <!-- JS -->
   <script src="{{ url_for('static', filename='js/map.js') }}"></script>
 
-  <title>Luups Map</title>
-  <!-- TODO add favicon here -->
+  <title>LUUPSMAP - Die Wienkarte</title>
+  <link href="{{ url_for('static', filename='img/fav.ico') }}" rel="shortcut icon"/>
 </head>
 <body class="bg--off-white fnt--dark-gray">
 
 <header class="bg--white fnt--dark-gray">
   <section class="p1">
-    <span class="h4">LUUPS-MAP</span>
+    <span class="h4">
+      <span class="bg--green fnt--off-white heart">❤</span>
+      <strong>LUUPSMAP</strong>
+      <span class="city-name"><span>Wien</span></span>
+    </span>
     {% block header_controls %}{% endblock %}
   </section>
 </header>

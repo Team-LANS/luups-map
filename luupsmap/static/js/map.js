@@ -41,9 +41,8 @@ const addMarker = (venue, position) => {
     animation: google.maps.Animation.DROP,
     icon: getMarkerIcon(type)
   });
-  marker.addListener('click', (e) => {
+  marker.addListener('click', () => {
     openInfoWindow(venue, marker);
-    e.va.preventDefault();
   });
   return marker;
 };

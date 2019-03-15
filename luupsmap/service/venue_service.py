@@ -36,4 +36,4 @@ class VenueService:
         if types:
             return sum(voucher_type.value for voucher_type in types)
 
-        return Type.value_sum()
+        return 0
