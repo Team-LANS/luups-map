@@ -8,9 +8,41 @@ const VIENNA_COORDS = {
 
 const DEFAULT_ZOOM = 15;
 
+const MAP_STYLE = [
+  {
+    elementType: 'geometry.fill',
+    stylers: [
+      {saturation: -75},
+      {lightness: 50}
+    ]
+  },
+  {
+    elementType: 'geometry.stroke',
+    stylers: [
+      {saturation: -75},
+      {lightness: 25}
+    ]
+  },
+  {
+    elementType: 'labels.icon',
+    stylers: [
+      {saturation: -75},
+      {lightness: 13}
+    ]
+  },
+  {
+    elementType: 'labels.text',
+    stylers: [
+      {saturation: -75},
+      {lightness: 25}
+    ]
+  }
+];
+
 const MAP_OPTIONS = {
   center: VIENNA_COORDS,
   zoom: DEFAULT_ZOOM,
+  styles: MAP_STYLE,
   zoomControl: false,
   mapTypeControl: false,
   scaleControl: false,
