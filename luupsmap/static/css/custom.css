@@ -104,13 +104,7 @@ footer a:hover {
   z-index: -1;
 }
 
-.overlay:target {
-  visibility: visible;
-  opacity: 1;
-  z-index: 1;
-}
-
-.popup {
+.modal {
   margin: 30px auto;
   padding: 10px;
   background: #fff;
@@ -120,7 +114,13 @@ footer a:hover {
   transition: all 5s ease-in-out;
 }
 
-.popup .close {
+.visible {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal .close {
   right: 30px;
   transition: all 200ms;
   font-size: 25px;
@@ -129,28 +129,28 @@ footer a:hover {
   color: #333;
 }
 
-.popup .close:hover {
+.modal .close:hover {
   color: #06D85F;
 }
 
-.popup .content {
+.modal .content {
   overflow: auto;
 }
 
-.popup .header {
+.modal .header {
   height: 50px;
   width: 100%;
   top: 0
 }
 
-.popup .footer {
+.modal .footer {
   height: 50px;
   width: 100%;
   bottom: 0
 }
 
 @media screen and (max-width: 700px) {
-  .popup {
+  .modal {
     height: 90%;
     width: 90%;
   }

@@ -1,8 +1,8 @@
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, request
 
 from luupsmap import app
-from luupsmap.forms import LoginForm
 from luupsmap.service import VenueService
+from luupsmap.model import Type
 
 venue_service = VenueService()
 
@@ -10,19 +10,22 @@ venue_service = VenueService()
 @app.route('/', methods=['GET'])
 def index():
     venues_ = venue_service.find_all()
-    form = LoginForm()
-    return render_template('main.html', venues=venues_, form=form)
+    return render_template('main.html', venues=venues_)
 
 
 @app.route('/', methods=['POST'])
-def todo():
-    # TODO adapt this section
-    venues_ = venue_service.find_all()
-    form = LoginForm()
-    if form.validate_on_submit():
-        return redirect(url_for('index', _anchor='none'))
-    return render_template('main.html', venues=venues_, form=form)
+def filter():
+    types = []
+    if "food" in request.form.keys():
+        types.append(Type.FOOD)
+    if "drinks" in request.form.keys():
+        types.append(Type.DRINK)
+    if "entertainment" in request.form.keys():
+        types.append(Type.TICKET)
 
+    venues_ = venue_service.find_by_type(types)
+
+    return render_template('main.html', venues=venues_)
 
 @app.route('/<int:venue_id>', methods=['GET'])
 def show_details(venue_id):

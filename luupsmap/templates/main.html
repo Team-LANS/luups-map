@@ -1,8 +1,8 @@
 {% extends 'index.html' %}
 
 {% block header_controls %}
-  <div class="media flt--right">
-    <a class="cta" href="#popup">
+  <div class="media flt--right" onclick="showModal(true)">
+    <a class="cta">
       <svg viewBox="0 0 24 24">
         <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#search"></use>
       </svg>
@@ -11,34 +11,18 @@
 {% endblock %}
 
 {% block content %}
-  <div id="popup" class="overlay">
-    <div class="popup">
-      <a class="close flt--right " href="#">&times;</a>
+  <div id="overlay" class="overlay">
+    <div id="modal" class="modal">
+      <a class="close flt--right" onclick="showModal(false)">&times;</a>
       <header class="header">
       </header>
       <div class="content">
-        <div class="content">
-          <h1>Sign In</h1>
-          <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <p>
-              {{ form.username.label }}<br>
-              {{ form.username(size=32) }}
-              {% for error in form.username.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-              {% endfor %}
-            </p>
-            <p>
-              {{ form.password.label }}<br>
-              {{ form.password(size=32) }}
-              {% for error in form.password.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-              {% endfor %}
-            </p>
-            <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-            <p><a href="#"></a>{{ form.submit() }}</p>
-          </form>
-        </div>
+        <form action="" method="post">
+          <input type="checkbox" name="food">
+          <input type="checkbox" name="drinks">
+          <input type="checkbox" name="entertainment">
+          <input type="submit" value="Submit">
+        </form>
       </div>
     </div>
   </div>
@@ -56,7 +40,7 @@
           id: '{{ venue.id  }}',
           name: '{{ venue.name | escape }}',
           homepage: '{{ venue.homepage }}',
-          type: '{{ venue.type }}',
+          type: '{{ venue.type}}',
           href: '{{ url_for('show_details', venue_id=venue.id) }}'
         };
         addMarker(venue_dict, {

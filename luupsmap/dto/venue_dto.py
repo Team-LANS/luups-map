@@ -1,5 +1,4 @@
 """Venue DTOs."""
-from flask import jsonify
 
 from luupsmap.dto import VoucherDto, LocationDto
 

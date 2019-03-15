@@ -15,11 +15,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-
 from luupsmap.model import *
 
 import luupsmap.views
-
-import luupsmap.forms
 
 import luupsmap.cli.data
