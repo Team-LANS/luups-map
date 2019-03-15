@@ -6,8 +6,34 @@
 {% block content %}
   <section class="measure p2">
     <article>
-      <h1>{{ venue.name }}</h1>
-      <section class="bg--white my2 p1">TODO</section>
+      <h2>{{ venue.name }}</h2>
+      {% for voucher in venue.vouchers %}
+        {% set types = voucher.voucher_types | string %}
+        <section class="voucher-container bg--white">
+          {% if 'food' in types %}
+            <section class="icon-container food">
+              <svg viewBox="0 0 24 24" class="icon-small">
+                <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#food"></use>
+              </svg>
+            </section>
+          {% endif %}
+          {% if 'drink' in types %}
+            <section class="icon-container drink">
+              <svg viewBox="0 0 24 24" class="icon-small">
+                <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#drink"></use>
+              </svg>
+            </section>
+          {% endif %}
+          {% if 'ticket' in types %}
+            <section class="icon-container ticket">
+              <svg viewBox="0 0 24 24" class="icon-small">
+                <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#ticket"></use>
+              </svg>
+            </section>
+          {% endif %}
+          <span class="px1">{{ voucher.description }}</span>
+        </section>
+      {% endfor %}
       <p>{{ venue.description }}
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
         dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet

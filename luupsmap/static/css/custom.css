@@ -177,3 +177,51 @@ footer a:hover {
     font-size: 0.707rem;
   }
 }
+
+/* VOUCHER ************************************************************************************************************/
+
+.voucher-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+h2 + .voucher-container {
+  margin-top: 2rem;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 4rem;
+  width: 4rem;
+}
+
+.icon-container.food {
+  background: #ffab00;
+}
+
+.icon-container.drink {
+  background: #607d8b;
+}
+
+.icon-container.ticket {
+  background: #c2185b;
+}
+
+.icon-container svg {
+  fill: #fff;
+}
+
+/* SVG ****************************************************************************************************************/
+
+svg {
+  height: 2rem;
+}
+
+svg.icon-small {
+  height: 1.5rem;
+}

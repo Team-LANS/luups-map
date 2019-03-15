@@ -3,7 +3,9 @@
 {% block header_controls %}
   <div class="media flt--right">
     <a class="cta" href="#popup">
-      <img src="/static/svg/icons/magnifying_glass.svg" alt="Search">
+      <svg viewBox="0 0 24 24">
+        <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#search"></use>
+      </svg>
     </a>
   </div>
 {% endblock %}
