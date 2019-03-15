@@ -1,4 +1,4 @@
-{% extends "index.html" %}
+{% extends 'index.html' %}
 
 {% block header_controls %}
 {% endblock %}
@@ -34,14 +34,7 @@
           <span class="px1">{{ voucher.description }}</span>
         </section>
       {% endfor %}
-      <p>{{ venue.description }}
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-        diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-        takimata sanctus est Lorem ipsum dolor sit amet.
-      </p>
+      <p>{{ venue.description }}</p>
       <small><strong class="fnt--dark-gray">
         {{ venue.phone }}
         {% if venue.phone and (venue.homepage or venue.email) %}&nbsp; ·&nbsp; {% endif %}

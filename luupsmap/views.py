@@ -26,17 +26,4 @@ def todo():
 
 @app.route('/<int:venue_id>', methods=['GET'])
 def show_details(venue_id):
-    venue = venue_service.get(venue_id)
-
-    return render_template('details.html', venue=venue)
-
-
-@app.route('/venues')
-def venues():
-    venues = venue_service.find_all()
-    return render_template('venues/index.html', venues=venues)
-
-
-@app.route('/venue/<venue_id>')
-def view(venue_id):
-    return render_template('venues/show.html', venue=VenueService.get(venue_id))
+    return render_template('details.html', venue=venue_service.get(venue_id))
