@@ -108,7 +108,6 @@ footer a:hover {
   margin: 30px auto;
   padding: 10px;
   background: #fff;
-  border-radius: 5px;
   width: 30%;
   position: relative;
   transition: all 5s ease-in-out;
@@ -126,32 +125,75 @@ footer a:hover {
   font-size: 25px;
   font-weight: bold;
   text-decoration: none;
-  color: #333;
+  cursor: pointer;
 }
 
-.modal .close:hover {
-  color: #06D85F;
+.modal form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%
 }
 
 .modal .content {
   overflow: auto;
+  height: 100%;
+  text-align: center;
 }
 
-.modal .header {
-  height: 50px;
-  width: 100%;
-  top: 0
+.content-header h3 {
+  display: inline-block;
 }
 
-.modal .footer {
+.content-header {
+  margin-bottom: 30px;
+}
+
+.modal-footer {
   height: 50px;
+  margin-bottom: 5px;
+}
+
+.modal-header {
+  height: 30px;
+}
+
+.check-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.check {
+  width: 60px;
+  height: 60px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.check input {
+  display: none;
+}
+
+.check input:checked + .box {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.check .box {
   width: 100%;
-  bottom: 0
+  height: 100%;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 @media screen and (max-width: 700px) {
   .modal {
-    height: 90%;
     width: 90%;
   }
 }

@@ -13,17 +13,44 @@
 {% block content %}
   <div id="overlay" class="overlay">
     <div id="modal" class="modal">
-      <a class="close flt--right" onclick="showModal(false)">&times;</a>
-      <header class="header">
-      </header>
-      <div class="content">
-        <form action="" method="post">
-          <input type="checkbox" name="food">
-          <input type="checkbox" name="drinks">
-          <input type="checkbox" name="entertainment">
-          <input type="submit" value="Submit">
-        </form>
-      </div>
+      <form action="" method="post">
+        <header class="modal-header">
+          <a class="close flt--right" onclick="showModal(false)">&times;</a>
+        </header>
+        <div class="content">
+          <h3 class="content-header">Nach Art filtern</h3>
+          <div class="check-container">
+            <label class="check">
+              <input type="checkbox" name="food">
+              <div class="box icon-container food">
+                <svg viewBox="0 0 24 24" class="food">
+                  <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#food"></use>
+                </svg>
+              </div>
+            </label>
+            <label class="check">
+              <input type="checkbox" name="drinks">
+              <div class="box icon-container drink">
+                <svg viewBox="0 0 24 24" class="drink">
+                  <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#drink"></use>
+                </svg>
+              </div>
+            </label>
+            <label class="check">
+              <input type="checkbox" name="entertainment">
+              <div class="box icon-container ticket">
+                <svg viewBox="0 0 24 24" class="ticket">
+                  <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#ticket"></use>
+                </svg>
+              </div>
+            </label>
+          </div>
+            <h3 class="content-header">Nach Tag filtern</h3>
+        </div>
+        <footer class="modal-footer ">
+          <input type="submit" value="Submit" class="btn--green">
+        </footer>
+      </form>
     </div>
   </div>
   <section id="map" class="map">
