@@ -158,7 +158,7 @@ footer a:hover {
   height: 30px;
 }
 
-.check-container {
+.type-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -166,8 +166,6 @@ footer a:hover {
 }
 
 .check {
-  width: 60px;
-  height: 60px;
   top: 0;
   bottom: 0;
   left: 0;
@@ -184,6 +182,11 @@ footer a:hover {
   transform: scale(1.1);
 }
 
+.type {
+  height: 60px;
+  width: 60px;
+}
+
 .check .box {
   width: 100%;
   height: 100%;
@@ -196,6 +199,32 @@ footer a:hover {
   .modal {
     width: 90%;
   }
+}
+
+.tag-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  flex-grow: 0;
+}
+
+.tag-container .check { flex-grow: 1; }
+
+.tag {
+  background: #69D2AC;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  opacity: 0.7;
+  padding: 3px;
+  color: white;
+}
+
+.check input:checked + .tag {
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 /* BUTTON *************************************************************************************************************/
