@@ -93,10 +93,9 @@ footer a:hover {
 #filter {
   border-radius: 50%;
   padding: 10px;
-  border: 1px solid #21a777;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-
+  box-shadow: 5px 5px 5px #888888;
 }
 
 #filter:hover {
