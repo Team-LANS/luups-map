@@ -104,6 +104,23 @@ const getUrlLink = (link) => {
   return `<a href="${url}">${linkText}</a>`;
 };
 
+const filterControl = (controlDiv) => {
+  // Set CSS for the control border.
+
+  let filter = document.getElementById('filter');
+  let controlUI = document.createElement('div');
+  controlDiv.appendChild(controlUI);
+  controlUI.appendChild(filter);
+  controlUI.addEventListener('click', function () {
+    showModal(true)
+  });
+};
+
 const initMap = () => {
   map = new google.maps.Map(getMapContainer(), MAP_OPTIONS);
+  let filterControlDiv = document.createElement('div');
+  filterControl(filterControlDiv);
+
+  filterControlDiv.index = 1;
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(filterControlDiv);
 };

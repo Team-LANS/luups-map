@@ -1,15 +1,5 @@
 {% extends 'index.html' %}
 
-{% block header_controls %}
-  <div class="media flt--right" onclick="showModal(true)">
-    <a class="cta">
-      <svg viewBox="0 0 24 24">
-        <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#search"></use>
-      </svg>
-    </a>
-  </div>
-{% endblock %}
-
 {% block content %}
   <div id="overlay" class="overlay">
     <div id="modal" class="modal">
@@ -20,9 +10,9 @@
         <div class="content">
           <h3 class="content-header">Nach Art filtern</h3>
           <div class="type-container">
-            {%  for type in types %}
+            {% for type in types %}
               <label class="check type">
-                <input type="checkbox" name="{{ type }}" checked>
+                <input type="checkbox" name="{{ type }}" checked="true">
                 <div class="box icon-container {{ type }}">
                   <svg viewBox="0 0 24 24" class="{{ type }}">
                     <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#{{ type }}"></use>
@@ -49,8 +39,14 @@
       </form>
     </div>
   </div>
+
+  <div id="content"></div>
+  <a id="filter" class="media bg--white m1" onclick="showModal(true)">
+    <svg viewBox="0 0 24 24" class="filter">
+      <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#search"></use>
+    </svg>
+  </a>
   <section id="map" class="map">
-    <div id="content"></div>
   </section>
   <!-- GOOGLE MAPS -->
   <script src="https://maps.googleapis.com/maps/api/js?key={{ config.GMAPS_API_KEY }}"></script>
