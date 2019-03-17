@@ -20,14 +20,15 @@ def filter():
     types = []
     if "food" in request.form.keys():
         types.append(Type.FOOD)
-    if "drinks" in request.form.keys():
+    if "drink" in request.form.keys():
         types.append(Type.DRINK)
     if "ticket" in request.form.keys():
         types.append(Type.TICKET)
 
     venues_ = venue_service.find_by_type(types)
-
-    return render_template('main.html', venues=venues_)
+    tags = [t.name.replace("_", " ").lower() for t in Tag]
+    types = [t.name.lower() for t in Type]
+    return render_template('main.html', venues=venues_, types=types, tags=tags)
 
 
 @app.route('/<int:venue_id>', methods=['GET'])

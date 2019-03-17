@@ -141,12 +141,8 @@ footer a:hover {
   text-align: center;
 }
 
-.content-header h3 {
-  display: inline-block;
-}
-
 .content-header {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .modal-footer {
@@ -163,6 +159,7 @@ footer a:hover {
   align-items: center;
   justify-content: center;
   flex-grow: 1;
+  margin-bottom: 10px;
 }
 
 .check {

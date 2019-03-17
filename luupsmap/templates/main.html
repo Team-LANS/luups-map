@@ -22,7 +22,7 @@
           <div class="type-container">
             {%  for type in types %}
               <label class="check type">
-                <input type="checkbox" name="{{ type }}">
+                <input type="checkbox" name="{{ type }}" checked>
                 <div class="box icon-container {{ type }}">
                   <svg viewBox="0 0 24 24" class="{{ type }}">
                     <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#{{ type }}"></use>
