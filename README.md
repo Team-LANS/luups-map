@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Team-LANS/luups-map/tree/master/luupsmap/static/img/logo.png"/>
+  <img src="https://github.com/Team-LANS/luups-map/blob/master/luupsmap/static/img/logo.png"/>
 </p>
 <p align="center">
   <a href="https://shields.io/">
@@ -23,7 +23,7 @@ A helpful tool for users of [LUUPS](https://www.luups.net/shop/gutscheinbuch/luu
 
 ## Development
 
-*LUUPSMAP* has a number of dependencies. Install them using
+LUUPSMAP has a number of dependencies. Install them using
 
 ```bash
 pip install -r requirements.txt
@@ -31,7 +31,7 @@ pip install -r requirements.txt
 
 ### Environment Variables
 
-*LUUPSMAP* requires a number of environment variables to run. Create a `.env` file in the application root and add at
+LUUPSMAP requires a number of environment variables to run. Create a `.env` file in the application root and add at
 least the following variables:
 
 ```bash
@@ -53,7 +53,7 @@ flask run
 
 ### Database 
 
-*LUUPSMAP* requires PostgreSQL to be running under `localhost:5432`. The development database is named `luups_map_dev`
+LUUPSMAP requires PostgreSQL to be running under `localhost:5432`. The development database is named `luups_map_dev`
 and needs to be created manually.
 
 After changing the model create migrations and upgrade the database using:
