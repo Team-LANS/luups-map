@@ -1,6 +1,7 @@
 <p align="center">
   <img src="https://github.com/Team-LANS/luups-map/blob/master/luupsmap/static/img/logo.png"/>
 </p>
+<h1 align="center">LUUPSMAP</h1>
 <p align="center">
   <a href="https://shields.io/">
     <img src="https://img.shields.io/badge/written_in-python3-3498db.svg?style=for-the-badge" />
@@ -16,7 +17,6 @@
 </p>
 
 
-# LUUPSMAP
 A helpful tool for users of [LUUPS](https://www.luups.net/shop/gutscheinbuch/luups-wien/):
 * Display all venues on a map
 * Filter by voucher type, opening hours,...
