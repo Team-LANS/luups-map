@@ -6,7 +6,7 @@
     <img src="https://img.shields.io/badge/written_in-python3-3498db.svg?style=for-the-badge" />
   </a>
   <a href="https://shields.io/">
-    <img src="https://img.shields.io/badge/using-postgres-25ba84.svg?style=for-the-badge" />
+    <img src="https://img.shields.io/badge/using-postgres-909090.svg?style=for-the-badge" />
   </a>
 </p>
 <p align="center">
