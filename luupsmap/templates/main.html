@@ -2,51 +2,54 @@
 
 {% block content %}
   <div id="overlay" class="overlay">
-    <div id="modal" class="modal">
+    <section id="modal" class="modal bg--white">
       <form action="" method="post">
+
         <header class="modal-header">
+          <h3>Filter</h3>
           <a class="close flt--right" onclick="showModal(false)">&times;</a>
         </header>
-        <div class="content">
-          <h3 class="content-header">Nach Art filtern</h3>
-          <div class="type-container">
+
+        <article class="modal-content">
+
+          <h4 class="marked">Gutscheinart</h4>
+          <section class="type-container">
             {% for type in types %}
-              <label class="check type">
-                <input type="checkbox" name="{{ type }}" checked="true">
-                <div class="box icon-container {{ type }}">
-                  <svg viewBox="0 0 24 24" class="{{ type }}">
-                    <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#{{ type }}"></use>
-                  </svg>
-                </div>
+              <input type="checkbox" id="type-{{ type }}" name="{{ type }}" class="type-tag">
+              <label for="type-{{ type }}" class="{{ type }} type-label">
+                <svg viewBox="0 0 24 24" class="icon-small">
+                  <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#{{ type }}"></use>
+                </svg>
               </label>
             {% endfor %}
-          </div>
-          <h3 class="content-header">Nach Tag filtern</h3>
-          <div class="tag-container">
+          </section>
+
+          <h4 class="marked">Tags</h4>
+          <section class="tag-container">
             {% for tag in tags %}
-              <label class="check">
-                <input type="checkbox" name="{{ tag }}">
-                <div class="tag">
-                  {{ tag }}
-                </div>
-              </label>
+              <input type="checkbox" id="tag-{{ tag }}" name="{{ tag }}" class="tag">
+              <label for="tag-{{ tag }}" class="tag-label">{{ tag }}<span class="remove">&times;</span></label>
             {% endfor %}
-          </div>
-        </div>
+          </section>
+
+        </article>
+
         <footer class="modal-footer ">
-          <input type="submit" value="Submit" class="btn--green">
+          <input type="submit" value="Filter anwenden" class="btn--green">
         </footer>
+
       </form>
-    </div>
+    </section>
   </div>
 
-  <a id="filter" class="media bg--white m1" onclick="showModal(true)">
-    <svg viewBox="0 0 24 24" class="filter">
+  <a id="openFilter" class="map-button" onclick="showModal(true)">
+    <svg viewBox="0 0 24 24">
       <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#search"></use>
     </svg>
   </a>
-  <section id="map" class="map">
-  </section>
+
+  <section id="map" class="map"></section>
+
   <!-- GOOGLE MAPS -->
   <script src="https://maps.googleapis.com/maps/api/js?key={{ config.GMAPS_API_KEY }}"></script>
   <script>

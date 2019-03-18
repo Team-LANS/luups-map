@@ -90,24 +90,28 @@ footer a:hover {
   width: 100%;
 }
 
-#filter {
-  border-radius: 50%;
-  padding: 10px;
+.map-button {
+  display: flex;
+  margin: 1rem 1.5rem;
+  padding: 0.5rem;
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 5px 5px 5px #888888;
+  transition: all 200ms ease-in-out;
 }
 
-#filter:hover {
-  transform: scale(1.1);
+.map-button:hover {
+  box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.4);
 }
 
-#filter .filter {
-  fill: #484848;;
+.map-button > svg {
+  fill: #484848;
+  height: 1.25rem;
 }
-
 
 /* MODAL **************************************************************************************************************/
+
 .overlay {
   position: absolute;
   top: 0;
@@ -121,56 +125,73 @@ footer a:hover {
   z-index: -1;
 }
 
-.modal {
-  margin: 30px auto;
-  padding: 10px;
-  background: #fff;
-  width: 30%;
-  position: relative;
-  transition: all 5s ease-in-out;
-
-}
-
-.visible {
+.overlay.visible {
   z-index: 1;
   opacity: 1;
   visibility: visible;
 }
 
-.modal .close {
-  right: 30px;
-  transition: all 200ms;
-  font-size: 25px;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
+.modal {
+  position: relative;
+  margin: 2rem auto;
+  padding: 0 1rem 1rem;
+  width: calc(100% - 2rem);
+  max-width: 32rem;
+  border-radius: 2px;
+  box-shadow: 3px 5px 20px 0 rgba(0, 0, 0, 0.5);
+  transition: all 5s ease-in-out;
 }
 
-.modal form {
+.modal > form {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   height: 100%
 }
 
-.modal .content {
+.modal-header {
+  display: flex;
+}
+
+.modal-header > h3 {
+  margin: 0 0 0 2rem;
+  padding: 1rem 0 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.modal-header > .close {
+  margin-left: auto;
+  width: 2rem;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: right;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content {
   overflow: auto;
   height: 100%;
   text-align: center;
 }
 
-.content-header {
+.modal-content h4 {
   margin-bottom: 25px;
 }
 
 .modal-footer {
-  height: 50px;
-  margin-bottom: 5px;
+  margin-top: 0.5rem;
 }
 
-.modal-header {
-  height: 30px;
+/* FILTER *************************************************************************************************************/
+
+.type-container > input[type=checkbox],
+.tag-container > input[type=checkbox] {
+  display: none;
 }
+
+/* TYPE FILTER */
 
 .type-container {
   display: flex;
@@ -180,66 +201,124 @@ footer a:hover {
   margin-bottom: 10px;
 }
 
-.check {
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
+.type-label {
+  height: 3.5rem;
+  width: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem;
+  border-radius: 4px;
+  border: solid 1px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
-.check input {
-  display: none;
+.type-label {
+  border-color: #24b37f;
 }
 
-.check input:checked + .box {
-  opacity: 1;
+.type-label > svg {
+  fill: #484848;
+}
+
+.type-label:hover,
+.type-label:focus {
+  background: rgba(0, 0, 0, .05);
+}
+
+.type-tag:checked + .type-label {
   transform: scale(1.1);
 }
 
-.type {
-  height: 60px;
-  width: 60px;
+.type-tag:checked + .type-label.food {
+  border: none;
+  background: #ffab00;
 }
 
-.check .box {
-  width: 100%;
-  height: 100%;
-  opacity: 0.7;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
+.type-tag:checked + .type-label.drink {
+  border: none;
+  background: #607d8b;
 }
 
-@media screen and (max-width: 700px) {
-  .modal {
-    width: 90%;
-  }
+.type-tag:checked + .type-label.ticket {
+  border: none;
+  background: #c2185b;
 }
+
+.type-tag:checked + .type-label.food:hover,
+.type-tag:checked + .type-label.food:focus {
+  background: #ff8f00;
+}
+
+.type-tag:checked + .type-label.drink:hover,
+.type-tag:checked + .type-label.drink:focus {
+  background: #78909c;
+}
+
+.type-tag:checked + .type-label.ticket:hover,
+.type-tag:checked + .type-label.ticket:focus {
+  background: #d81b60;
+}
+
+.type-tag:checked + .type-label > svg {
+  fill: #fff;
+}
+
+/* TAG FILTER */
 
 .tag-container {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-bottom: 10px;
-  flex-grow: 0;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-.tag-container .check { flex-grow: 1; }
-
-.tag {
-  background: #69D2AC;
-  margin: 5px;
+.tag-label {
+  margin: 5px 8px;
+  height: 2rem;
+  line-height: 2rem;
+  padding: 0 1rem 0 1.25rem;
+  border-radius: 1rem;
+  border: solid 1px #24b37f;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  opacity: 0.7;
-  padding: 3px;
-  color: white;
 }
 
-.check input:checked + .tag {
-  opacity: 1;
+.tag-label:hover,
+.tag-label:focus {
+  background: rgba(0, 0, 0, .05);
+}
+
+.tag-label > .remove {
+  display: inline-block;
+  padding-left: 0.25rem;
+  max-width: 0;
+  color: #fff;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.tag:checked + .tag-label {
+  background: #24b37f;
+  color: #fff;
   transform: scale(1.05);
+}
+
+@media screen and (min-width: 36rem) {
+  .tag:checked + .tag-label {
+    margin: 5px;
+  }
+}
+
+.tag:checked + .tag-label:hover,
+.tag:checked + .tag-label:focus {
+  background: #21a777;
+}
+
+input:checked + .tag-label > .remove {
+  opacity: 0.7;
+  padding-right: 0.25rem;
 }
 
 /* BUTTON *************************************************************************************************************/
@@ -323,6 +402,7 @@ svg.icon-small {
   border-radius: 0.5rem;
 }
 
+.marked,
 .city-name {
   display: inline-block;
   height: 1.6rem;

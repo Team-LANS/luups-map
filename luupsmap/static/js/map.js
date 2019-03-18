@@ -107,7 +107,7 @@ const getUrlLink = (link) => {
 const filterControl = (controlDiv) => {
   // Set CSS for the control border.
 
-  let filter = document.getElementById('filter');
+  let filter = document.getElementById('openFilter');
   let controlUI = document.createElement('div');
   controlDiv.appendChild(controlUI);
   controlUI.appendChild(filter);
