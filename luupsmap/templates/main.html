@@ -27,8 +27,10 @@
           <h4 class="marked">Tags</h4>
           <section class="tag-container">
             {% for tag in tags %}
-              <input type="checkbox" id="tag-{{ tag }}" name="{{ tag }}" class="tag">
-              <label for="tag-{{ tag }}" class="tag-label">{{ tag }}<span class="remove">&times;</span></label>
+              {%  set tag_name = tag[0] %}
+              {%  set tag_pretty = tag[1] %}
+              <input type="checkbox" id="tag-{{ tag_name }}" name="tag-{{ tag_name }}" class="tag">
+              <label for="tag-{{ tag_name }}" class="tag-label">{{ tag_pretty }}<span class="remove">&times;</span></label>
             {% endfor %}
           </section>
 

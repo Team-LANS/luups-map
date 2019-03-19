@@ -10,23 +10,19 @@ venue_service = VenueService()
 @app.route('/', methods=['GET'])
 def index():
     venues_ = venue_service.find_all()
-    tags = [t.name.replace("_", " ").lower() for t in Tag]
+    tags = [(t.name.lower(), t.name.replace("_", " ").lower()) for t in Tag]
     types = [t.name.lower() for t in Type]
     return render_template('main.html', venues=venues_, types=types, tags=tags)
 
 
 @app.route('/', methods=['POST'])
 def filter():
-    types = []
-    if "food" in request.form.keys():
-        types.append(Type.FOOD)
-    if "drink" in request.form.keys():
-        types.append(Type.DRINK)
-    if "ticket" in request.form.keys():
-        types.append(Type.TICKET)
 
-    venues_ = venue_service.find_by_type(types)
-    tags = [t.name.replace("_", " ").lower() for t in Tag]
+    types = [t for t in Type if t.name.lower() in request.form.keys()]
+    tags = [t for t in Tag if "tag-"+t.name.lower() in request.form.keys()]
+
+    venues_ = venue_service.filter_by(types, tags)
+    tags = [(t.name.lower(), t.name.replace("_", " ").lower()) for t in Tag]
     types = [t.name.lower() for t in Type]
     return render_template('main.html', venues=venues_, types=types, tags=tags)
 

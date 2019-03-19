@@ -1,6 +1,6 @@
 from luupsmap import db
 from luupsmap.dto.venue_dto import VenueDto, VenueDetailDto
-from luupsmap.model import Venue, Type, Voucher, VoucherType
+from luupsmap.model import Venue, Voucher, VoucherType, VoucherTag
 from luupsmap.service import as_dto
 
 
@@ -17,8 +17,8 @@ class VenueService:
 
         return venues
 
-    def find_by_type(self, types):
-        venues = self.__find_by_type(types)
+    def filter_by(self, types, tags):
+        venues = self.__filter_by(types, tags)
 
         # TODO: Improve conversion to DTO so we dont' have to patch this afterwards
         for venue in venues:
@@ -31,13 +31,16 @@ class VenueService:
         return self.db_session.query(Venue).all()
 
     @as_dto(VenueDto)
-    def __find_by_type(self, types):
+    def __filter_by(self, types, tags):
         venues = self.db_session.query(Venue) \
             .join(Voucher) \
             .join(VoucherType) \
-            .filter(VoucherType.type.in_(types)) \
-            .all()
-        return venues
+            .outerjoin(VoucherTag)
+        if types:
+            venues = venues.filter(VoucherType.type.in_(types))
+        if tags:
+            venues = venues.filter(VoucherTag.tag.in_(tags))
+        return venues.all()
 
     @as_dto(VenueDetailDto)
     def get(self, venue_id):
