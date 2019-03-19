@@ -36,5 +36,26 @@ class Tag(Enum):
     COMBINATION = 'COMBINATION'
     SEASONAL = 'SEASONAL'
 
+    @classmethod
+    def translation(cls, tag):
+        translations = {
+            Tag.BREAKFAST: 'Frühstück',
+            Tag.MAIN_COURSE: 'Hauptmahlzeit',
+            Tag.SNACK: 'Snack',
+            Tag.PASTRIES: 'Gebäck',
+            Tag.ICE_CREAM: 'Eis',
+            Tag.COFFEE: 'Kaffee',
+            Tag.ALCOHOL: 'Alkoholhaltiges',
+            Tag.EVENT: 'Event',
+            Tag.TICKET: 'Ticket',
+            Tag.GUIDED_TOUR: 'Geleitete Tour',
+            Tag.WORKSHOP: 'Workshop',
+            Tag.SHOPPING: 'Shopping',
+            Tag.FREE_GIFT: 'Gratis',
+            Tag.COMBINATION: 'Kombination',
+            Tag.SEASONAL: 'Saisonales'
+        }
+        return translations[tag]
+
     def __repr__(self):
         return self.name.lower()
