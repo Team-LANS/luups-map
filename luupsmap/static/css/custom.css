@@ -93,7 +93,7 @@ footer a:hover {
 .map-button {
   display: flex;
   margin: 1rem 1.5rem;
-  padding: 0.5rem;
+  padding: 0.75rem;
   border-radius: 2px;
   background: #fff;
   box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.2);
@@ -107,7 +107,7 @@ footer a:hover {
 
 .map-button > svg {
   fill: #484848;
-  height: 1.25rem;
+  height: 1rem;
 }
 
 /* MODAL **************************************************************************************************************/
