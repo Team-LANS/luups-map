@@ -117,10 +117,24 @@ const filterControl = (controlDiv) => {
 };
 
 const initMap = () => {
-  map = new google.maps.Map(getMapContainer(), MAP_OPTIONS);
+  // use stored map position and zoom
+  const storedCenter = sessionStorage.getItem('mapCenter');
+  const storedZoom = sessionStorage.getItem('mapZoom');
+  const mapOptions = storedCenter ?
+    Object.assign({}, MAP_OPTIONS, {
+      center: JSON.parse(storedCenter),
+      zoom: parseInt(storedZoom, 10)
+    }) :
+    MAP_OPTIONS;
+
+  map = new google.maps.Map(getMapContainer(), mapOptions);
+  map.addListener('center_changed', () => {
+    sessionStorage.setItem('mapCenter', JSON.stringify(map.getCenter().toJSON()));
+    sessionStorage.setItem('mapZoom', map.getZoom());
+  });
+
   let filterControlDiv = document.createElement('div');
   filterControl(filterControlDiv);
-
   filterControlDiv.index = 1;
   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(filterControlDiv);
 };
