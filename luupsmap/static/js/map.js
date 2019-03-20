@@ -117,24 +117,39 @@ const filterControl = (controlDiv) => {
 };
 
 const initMap = () => {
-  // use stored map position and zoom
-  const storedCenter = sessionStorage.getItem('mapCenter');
-  const storedZoom = sessionStorage.getItem('mapZoom');
-  const mapOptions = storedCenter ?
-    Object.assign({}, MAP_OPTIONS, {
-      center: JSON.parse(storedCenter),
-      zoom: parseInt(storedZoom, 10)
-    }) :
-    MAP_OPTIONS;
+  const storedPosition = getStoredPosition();
+  const mapOptions = storedPosition ? Object.assign({}, MAP_OPTIONS, storedPosition) : MAP_OPTIONS;
 
   map = new google.maps.Map(getMapContainer(), mapOptions);
   map.addListener('center_changed', () => {
-    sessionStorage.setItem('mapCenter', JSON.stringify(map.getCenter().toJSON()));
-    sessionStorage.setItem('mapZoom', map.getZoom());
+    storePosition();
+  });
+  map.addListener('zoom_changed', () => {
+    storePosition();
   });
 
   let filterControlDiv = document.createElement('div');
   filterControl(filterControlDiv);
   filterControlDiv.index = 1;
   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(filterControlDiv);
+};
+
+const getStoredPosition = () => {
+  const storedCenter = sessionStorage.getItem('mapCenter');
+  const storedZoom = sessionStorage.getItem('mapZoom');
+  try {
+    const center = JSON.parse(storedCenter);
+    const zoom = parseInt(storedZoom, 10);
+    if (!isNaN(zoom)) {
+      return {center, zoom};
+    }
+  } catch (e) {
+    console.log(e);
+  }
+  return undefined;
+};
+
+const storePosition = () => {
+  sessionStorage.setItem('mapCenter', JSON.stringify(map.getCenter().toJSON()));
+  sessionStorage.setItem('mapZoom', map.getZoom());
 };
