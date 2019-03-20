@@ -46,7 +46,7 @@ class Tag(Enum):
             Tag.COFFEE: 'Kaffee',
             Tag.ALCOHOL: 'Alkoholhaltiges',
             Tag.TICKET: 'Ticket',
-            Tag.GUIDED_TOUR: 'Geleitete Tour',
+            Tag.GUIDED_TOUR: 'Führung',
             Tag.WORKSHOP: 'Workshop',
             Tag.SHOPPING: 'Shopping',
             Tag.FREE_GIFT: 'Gratis',
