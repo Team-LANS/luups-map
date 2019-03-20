@@ -14,7 +14,7 @@ class CsvFile:
         processed_locations_file = NamedTemporaryFile(delete=False)
         strip_whitepace(self.file, processed_locations_file)
         locations = []
-        with open(processed_locations_file.name, 'r') as venues_file:
+        with open(processed_locations_file.name, 'r', encoding='utf-8') as venues_file:
             reader = csv.DictReader(venues_file, fieldnames=self.fieldnames, delimiter='|')
             next(reader, None)
             for row in reader:
