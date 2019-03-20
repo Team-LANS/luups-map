@@ -51,10 +51,25 @@ Confirm that you can start the application by running
 flask run
 ```
 
+You might need to set the environment variable `FLASK_APP` first:
+```bash
+# UNIX
+export FLASK_APP=luupsmap
+
+# WINDOWS
+set FLASK_APP=luupsmap
+```
+
 ### Database 
 
 LUUPSMAP requires PostgreSQL to be running under `localhost:5432`. The development database is named `luups_map_dev`
 and needs to be created manually.
+
+Initialize with the following command:
+
+```bash
+flask db init
+````
 
 After changing the model create migrations and upgrade the database using:
 

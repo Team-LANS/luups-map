@@ -25,7 +25,6 @@ class Tag(Enum):
     COFFEE = 'COFFEE'
     ALCOHOL = 'ALCOHOL'
 
-    EVENT = 'EVENT'
     TICKET = 'TICKET'
     GUIDED_TOUR = 'GUIDED_TOUR'
     WORKSHOP = 'WORKSHOP'
@@ -46,7 +45,6 @@ class Tag(Enum):
             Tag.ICE_CREAM: 'Eis',
             Tag.COFFEE: 'Kaffee',
             Tag.ALCOHOL: 'Alkoholhaltiges',
-            Tag.EVENT: 'Event',
             Tag.TICKET: 'Ticket',
             Tag.GUIDED_TOUR: 'Geleitete Tour',
             Tag.WORKSHOP: 'Workshop',
