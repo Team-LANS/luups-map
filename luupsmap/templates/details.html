@@ -31,7 +31,11 @@
               </svg>
             </section>
           {% endif %}
-          <span class="px1">{{ voucher.description }}</span>
+          <span class="px1">
+            {{ voucher.description }}<br>
+            <small class="constraint fnt--mid-gray">{{ voucher.limitations }}</small>
+          </span>
+
         </section>
       {% endfor %}
       <p>{{ venue.description }}</p>

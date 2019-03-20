@@ -33,7 +33,6 @@ class Tag(Enum):
     FREE_GIFT = 'FREE_GIFT'
 
     COMBINATION = 'COMBINATION'
-    SEASONAL = 'SEASONAL'
 
     @classmethod
     def translation(cls, tag):
@@ -50,8 +49,7 @@ class Tag(Enum):
             Tag.WORKSHOP: 'Workshop',
             Tag.SHOPPING: 'Shopping',
             Tag.FREE_GIFT: 'Gratis',
-            Tag.COMBINATION: 'Kombination',
-            Tag.SEASONAL: 'Saisonales'
+            Tag.COMBINATION: 'Kombination'
         }
         return translations[tag]
 

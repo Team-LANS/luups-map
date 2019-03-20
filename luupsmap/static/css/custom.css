@@ -351,6 +351,19 @@ input:checked + .tag-label > .remove {
   margin-bottom: 1rem;
 }
 
+.voucher-container span:first-letter {
+  text-transform: capitalize;
+}
+
+.voucher-container .constraint {
+  display: block;
+  margin-top: -0.25rem;
+}
+
+.voucher-container .constraint:first-letter {
+  text-transform: capitalize;
+}
+
 h2 + .voucher-container {
   margin-top: 2rem;
 }
