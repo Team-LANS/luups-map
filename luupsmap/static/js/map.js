@@ -44,6 +44,7 @@ const MAP_OPTIONS = {
   zoom: DEFAULT_ZOOM,
   styles: MAP_STYLE,
   zoomControl: false,
+  clickableIcons: false,
   mapTypeControl: false,
   scaleControl: false,
   streetViewControl: false,
