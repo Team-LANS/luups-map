@@ -11,12 +11,12 @@ class Config(object):
     # DB
     DB_USER = os.getenv('DB_USER')
     DB_PW = os.getenv('DB_PW')
-    # TODO: Properly set DB name in sub-configs
-    DB_NAME = 'luups_map_dev'
+    DB_ADDRESS = os.getenv('DB_ADDRESS')
+    DB_NAME = os.getenv('DB_NAME')
     SQLALCHEMY_DATABASE_URI = 'postgresql://{user}:{pw}@{address}/{db}'.format(
         user=DB_USER,
         pw=DB_PW,
-        address='localhost:5432',
+        address=DB_ADDRESS,
         db=DB_NAME
     )
 
@@ -27,7 +27,6 @@ class Config(object):
 
 
 class DevelopmentConfig(Config):
-    DB_NAME = 'luups_map_dev'
     DEBUG = True
     DEVELOPMENT = True
 
