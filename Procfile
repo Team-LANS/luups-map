@@ -1,1 +1,1 @@
-web: gunicorn app:luupsmap
+web: gunicorn luupsmap:app
