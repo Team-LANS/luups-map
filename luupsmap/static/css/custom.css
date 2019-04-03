@@ -414,15 +414,26 @@ svg.icon-small {
   height: 1.5rem;
 }
 
+svg.icon-tiny {
+  height: 0.55rem;
+}
+
 /* HEADER *************************************************************************************************************/
 
-.heart {
+.logo.heart {
   display: inline-block;
   height: 2rem;
   width: 2rem;
-  text-align: center;
   margin-right: 0.25rem;
   border-radius: 0.5rem;
+}
+
+.logo.heart svg {
+  fill: #fafafa;
+  height: 1.25rem;
+  margin-left: 0.27rem;
+  margin-top: 0.25rem;
+  margin-bottom: -0.1rem;
 }
 
 .marked,
@@ -435,5 +446,11 @@ svg.icon-small {
   font-family: 'Open Sans', sans-serif;
   font-size: 1.3rem;
   border-bottom: solid 5px #69D2AC;
+}
+
+/* FOOTER *************************************************************************************************************/
+
+footer svg.icon-tiny {
+  fill: #484848;
 }
 
