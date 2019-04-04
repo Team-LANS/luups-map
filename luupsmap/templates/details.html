@@ -40,11 +40,13 @@
       {% endfor %}
       <p class="py1">{{ venue.description }}</p>
       <small><strong class="fnt--dark-gray">
-        {{ venue.phone }}
-        {% if venue.phone and (venue.homepage or venue.email) %}&nbsp; ·&nbsp; {% endif %}
         {{ venue.homepage }}
-        {% if venue.homepage and venue.email %}&nbsp; ·&nbsp; {% endif %}
-        {{ venue.email }}
+        {% for location in venue.locations %}
+          {{ location.phone }}
+          {% if location.phone and (venue.homepage or location.email) %}&nbsp; ·&nbsp; {% endif %}
+          {% if venue.homepage and location.email %}&nbsp; ·&nbsp; {% endif %}
+          {{ venue.email }}
+        {% endfor %}
       </strong></small>
     </article>
   </section>
