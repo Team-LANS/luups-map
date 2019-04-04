@@ -9,8 +9,9 @@ class SeedCommand:
     vouchers = {}
 
     def __init__(self, venues_file, locations_file, vouchers_file):
-        self.venues_file = CsvFile(venues_file, ['name', 'homepage', 'email', 'phone', 'opening_hours', 'description'])
-        self.locations_file = CsvFile(locations_file, ['name', 'address', 'latitude', 'longitude'])
+        self.venues_file = CsvFile(venues_file, ['name', 'homepage', 'description'])
+        self.locations_file = CsvFile(locations_file,
+                                      ['name', 'address', 'email', 'phone', 'opening_hours', 'latitude', 'longitude'])
         self.vouchers_file = CsvFile(vouchers_file,
                                      ['name', 'description', 'limitations', 'voucher_tags', 'voucher_types'])
 
