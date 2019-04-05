@@ -42,11 +42,10 @@
       <small><strong class="fnt--dark-gray">
         {% set homepages = venue.homepage.replace(' ', '').split(',') %}
         {% for homepage in homepages %}
-          <a href="https://{{ homepage }}">{{ homepage }}</a><br>
+          <a href="http://{{ homepage }}">{{ homepage }}</a><br>
         {% endfor %}
         {{ location.phone }}
-        {% if location.phone and (venue.homepage or location.email) %}&nbsp; ·&nbsp; {% endif %}
-        {% if venue.homepage and location.email %}&nbsp; ·&nbsp; {% endif %}
+        {% if location.phone and location.email %}&nbsp; ·&nbsp; {% endif %}
         {{ venue.email }}
       </strong></small>
     </article>
