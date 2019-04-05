@@ -40,13 +40,14 @@
       {% endfor %}
       <p class="py1">{{ venue.description }}</p>
       <small><strong class="fnt--dark-gray">
-        {{ venue.homepage }}
-        {% for location in venue.locations %}
-          {{ location.phone }}
-          {% if location.phone and (venue.homepage or location.email) %}&nbsp; ·&nbsp; {% endif %}
-          {% if venue.homepage and location.email %}&nbsp; ·&nbsp; {% endif %}
-          {{ venue.email }}
+        {% set homepages = venue.homepage.replace(' ', '').split(',') %}
+        {% for homepage in homepages %}
+          <a href="https://{{ homepage }}">{{ homepage }}</a><br>
         {% endfor %}
+        {{ location.phone }}
+        {% if location.phone and (venue.homepage or location.email) %}&nbsp; ·&nbsp; {% endif %}
+        {% if venue.homepage and location.email %}&nbsp; ·&nbsp; {% endif %}
+        {{ venue.email }}
       </strong></small>
     </article>
   </section>
