@@ -40,9 +40,11 @@
       {% endfor %}
       <p class="py1">{{ venue.description }}</p>
       <small><strong class="fnt--dark-gray">
+        {# TODO: Fix dots when no phone or email exist#}
         {% set homepages = venue.homepage.replace(' ', '').split(',') %}
         {% for homepage in homepages %}
-          <a href="http://{{ homepage }}">{{ homepage }}</a><br>
+          <a href="http://{{ homepage }}">{{ homepage }}</a>
+          &nbsp; ·&nbsp;
         {% endfor %}
         {{ location.phone }}
         {% if location.phone and location.email %}&nbsp; ·&nbsp; {% endif %}
