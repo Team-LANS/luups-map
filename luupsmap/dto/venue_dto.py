@@ -1,5 +1,4 @@
 """Venue DTOs."""
-from flask import jsonify
 
 from luupsmap.dto import VoucherDto, LocationDto
 
@@ -26,6 +25,3 @@ class VenueDetailDto(VenueDto):
     def __init__(self, data):
         super().__init__(data)
         self.description = data.description
-        self.email = data.email
-        self.phone = data.phone
-        self.opening_hours = data.opening_hours

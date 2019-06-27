@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+
+{% block header_controls %}
+{% endblock %}
+
+{% block content %}
+  <section class="measure p2">
+    <article>
+      <h2>{{ venue.name }}</h2>
+      {% for voucher in venue.vouchers %}
+        {% set types = voucher.voucher_types | string %}
+        <section class="voucher-container bg--white">
+          {% if 'food' in types %}
+            <section class="icon-container food">
+              <svg viewBox="0 0 24 24" class="icon-small">
+                <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#food"></use>
+              </svg>
+            </section>
+          {% endif %}
+          {% if 'drink' in types %}
+            <section class="icon-container drink">
+              <svg viewBox="0 0 24 24" class="icon-small">
+                <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#drink"></use>
+              </svg>
+            </section>
+          {% endif %}
+          {% if 'ticket' in types %}
+            <section class="icon-container ticket">
+              <svg viewBox="0 0 24 24" class="icon-small">
+                <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#ticket"></use>
+              </svg>
+            </section>
+          {% endif %}
+          <span class="px1">
+            {{ voucher.description }}<br>
+            <small class="constraint fnt--mid-gray">{{ voucher.limitations }}</small>
+          </span>
+
+        </section>
+      {% endfor %}
+      <p class="py1">{{ venue.description }}</p>
+      <small><strong class="fnt--dark-gray">
+        {# TODO: Fix dots when no phone or email exist#}
+        {% set homepages = venue.homepage.replace(' ', '').split(',') %}
+        {% for homepage in homepages %}
+          <a href="http://{{ homepage }}">{{ homepage }}</a>
+          &nbsp; ·&nbsp;
+        {% endfor %}
+        {{ location.phone }}
+        {% if location.phone and location.email %}&nbsp; ·&nbsp; {% endif %}
+        {{ venue.email }}
+      </strong></small>
+    </article>
+  </section>
+{% endblock %}

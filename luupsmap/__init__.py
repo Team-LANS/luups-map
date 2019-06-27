@@ -19,8 +19,6 @@ from luupsmap.model import *
 
 import luupsmap.views
 
-import luupsmap.forms
-
 import luupsmap.cli.data
 
 

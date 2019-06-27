@@ -10,15 +10,24 @@
 
   <!-- JS -->
   <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 
-  <title>Luups Map</title>
-  <!-- TODO add favicon here -->
+  <title>LUUPSMAP - Die Wienkarte</title>
+  <link href="{{ url_for('static', filename='img/fav.ico') }}" rel="shortcut icon"/>
 </head>
 <body class="bg--off-white fnt--dark-gray">
 
 <header class="bg--white fnt--dark-gray">
   <section class="p1">
-    <span class="h4">LUUPS-MAP</span>
+    <span class="h4">
+      <span class="bg--green logo heart">
+        <svg viewBox="0 0 39.472 33.556999">
+          <use xlink:href="{{ url_for('static', filename='svg/heart.svg') }}#heart"></use>
+        </svg>
+      </span>
+      <strong>LUUPSMAP</strong>
+      <span class="city-name"><span>Wien</span></span>
+    </span>
     {% block header_controls %}{% endblock %}
   </section>
 </header>
@@ -30,7 +39,11 @@
 <footer>
   <section class="txt--center">
     <small>
-      Made with ❤ by <a href="https://github.com/Team-LANS">Team LANS</a>
+      Mit
+      <svg viewBox="0 0 39.472 33.556999" class="icon-tiny">
+        <use xlink:href="{{ url_for('static', filename='svg/heart.svg') }}#heart"></use>
+      </svg>
+      gemacht von <a href="https://github.com/Team-LANS">Team LANS</a>
     </small>
   </section>
 </footer>

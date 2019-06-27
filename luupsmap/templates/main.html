@@ -1,0 +1,76 @@
+{% extends 'index.html' %}
+
+{% block content %}
+  <div id="overlay" class="overlay">
+    <section id="modal" class="modal bg--white">
+      <form action="" method="post">
+
+        <header class="modal-header">
+          <h3>Filter</h3>
+          <a class="close flt--right" onclick="showModal(false)">&times;</a>
+        </header>
+
+        <article class="modal-content">
+
+          <h4 class="marked">Gutscheinart</h4>
+          <section class="type-container">
+            {% for type in types %}
+              <input type="checkbox" id="type-{{ type }}" name="{{ type }}" class="type-tag">
+              <label for="type-{{ type }}" class="{{ type }} type-label">
+                <svg viewBox="0 0 24 24" class="icon-small">
+                  <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#{{ type }}"></use>
+                </svg>
+              </label>
+            {% endfor %}
+          </section>
+
+          <h4 class="marked">Tags</h4>
+          <section class="tag-container">
+            {% for tag in tags %}
+              {%  set tag_name = tag[0] %}
+              {%  set tag_pretty = tag[1] %}
+              <input type="checkbox" id="tag-{{ tag_name }}" name="tag-{{ tag_name }}" class="tag">
+              <label for="tag-{{ tag_name }}" class="tag-label">{{ tag_pretty }}<span class="remove">&times;</span></label>
+            {% endfor %}
+          </section>
+
+        </article>
+
+        <footer class="modal-footer ">
+          <input type="submit" value="Filter anwenden" class="btn--green">
+        </footer>
+
+      </form>
+    </section>
+  </div>
+
+  <a id="openFilter" class="map-button" onclick="showModal(true)" title="Gutscheine filtern">
+    <svg viewBox="0 0 24 24">
+      <use xlink:href="{{ url_for('static', filename='svg/icons/all.svg') }}#search"></use>
+    </svg>
+  </a>
+
+  <section id="map" class="map"></section>
+
+  <!-- GOOGLE MAPS -->
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ config.GMAPS_API_KEY }}"></script>
+  <script>
+    initMap();
+    {% for venue in venues %}
+      {% for location in venue.locations %}
+        {# TODO: Proper JSON serisalization #}
+        venue_dict = {
+          id: '{{ venue.id  }}',
+          name: '{{ venue.name | escape }}',
+          homepage: '{{ venue.homepage }}',
+          type: '{{ venue.type}}',
+          href: '{{ url_for('show_details', location_id=location.id) }}'
+        };
+        addMarker(venue_dict, {
+          lat: {{ location.latitude }},
+          lng: {{ location.longitude }}
+        });
+      {% endfor %}
+    {% endfor %}
+  </script>
+{% endblock %}

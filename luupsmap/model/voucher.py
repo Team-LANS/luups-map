@@ -9,6 +9,7 @@ class Voucher(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_venue = db.Column(db.Integer, db.ForeignKey('venue.id'), nullable=False)
     description = db.Column(db.Text, nullable=False)
+    limitations = db.Column(db.Text)
 
     voucher_types = db.relationship("VoucherType")
     voucher_tags = db.relationship("VoucherTag")
@@ -16,6 +17,7 @@ class Voucher(db.Model):
     def __init__(self, data):
         self.venue = data['venue']
         self.description = data['description']
+        self.limitations = data['limitations']
         self.voucher_types = data['voucher_types']
         self.voucher_tags = data['voucher_tags']
 

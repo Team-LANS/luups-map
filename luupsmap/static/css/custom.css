@@ -1,13 +1,13 @@
 /* FONTS **************************************************************************************************************/
-/* TODO use local font */
 @import url('https://fonts.googleapis.com/css?family=Amaranth:400,700|Open+Sans:300,400,700');
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .h1, .h2, .h3, .h4, h1, h2, h3, h4 {
-  font-family: "Amaranth", sans-serif;
+  font-family: 'Amaranth', sans-serif;
+  text-transform: uppercase;
 }
 
 .thin {
@@ -26,12 +26,22 @@ body {
   height: 100%;
 }
 
+body > header {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
 main {
   flex-grow: 1;
 }
 
 footer {
   padding-bottom: .25rem;
+}
+
+body > footer {
+  box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.05);
+  z-index: 1;
 }
 
 /* LINKS **************************************************************************************************************/
@@ -65,7 +75,53 @@ footer a:hover {
   height: 100%;
 }
 
-/* MODAL  ****************************************************************************************************************/
+.info-window {
+  padding: 0.5rem;
+}
+
+.info-window > h5 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.gm-style-iw {
+  padding: 12px !important;
+}
+
+.gm-style-iw > .gm-ui-hover-effect {
+  top: -2px !important;
+  right: -2px !important;
+}
+
+.gm-style-iw .btn--s {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.map-button {
+  display: flex;
+  margin: 1rem 1.5rem;
+  padding: 0.75rem;
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.map-button:hover {
+  box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.4);
+}
+
+.map-button > svg {
+  fill: #484848;
+  height: 1.5rem;
+}
+
+/* MODAL **************************************************************************************************************/
+
 .overlay {
   position: absolute;
   top: 0;
@@ -79,55 +135,322 @@ footer a:hover {
   z-index: -1;
 }
 
-.overlay:target {
-  visibility: visible;
-  opacity: 1;
+.overlay.visible {
   z-index: 1;
+  opacity: 1;
+  visibility: visible;
 }
 
-.popup {
-  margin: 30px auto;
-  padding: 10px;
-  background: #fff;
-  border-radius: 5px;
-  width: 30%;
+.modal {
   position: relative;
+  margin: 2rem auto;
+  padding: 0 1rem 1rem;
+  width: calc(100% - 2rem);
+  max-width: 32rem;
+  border-radius: 2px;
+  box-shadow: 3px 5px 20px 0 rgba(0, 0, 0, 0.5);
   transition: all 5s ease-in-out;
 }
 
-.popup .close {
-  right: 30px;
-  transition: all 200ms;
+.modal > form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%
+}
+
+.modal-header {
+  display: flex;
+}
+
+.modal-header > h3 {
+  margin: 0 0 0 2rem;
+  padding: 1rem 0 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.modal-header > .close {
+  margin-left: auto;
+  width: 2rem;
   font-size: 25px;
   font-weight: bold;
+  text-align: right;
   text-decoration: none;
-  color: #333;
+  cursor: pointer;
 }
 
-.popup .close:hover {
-  color: #06D85F;
-}
-
-.popup .content {
+.modal-content {
   overflow: auto;
+  height: 100%;
+  text-align: center;
 }
 
-.popup .header {
-  height: 50px;
-  width: 100%;
-  top: 0
+.modal-content h4 {
+  margin-bottom: 25px;
 }
 
-.popup .footer {
-  height: 50px;
-  width: 100%;
-  bottom: 0
+.modal-footer {
+  margin-top: 0.5rem;
 }
-@media screen and (max-width: 700px) {
-  .popup {
-    height: 90%;
-    width: 90%;
+
+/* FILTER *************************************************************************************************************/
+
+.type-container > input[type=checkbox],
+.tag-container > input[type=checkbox] {
+  display: none;
+}
+
+/* TYPE FILTER */
+
+.type-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  margin-bottom: 10px;
+}
+
+.type-label {
+  height: 3.5rem;
+  width: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem;
+  border-radius: 4px;
+  border: solid 1px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.type-label {
+  border-color: #24b37f;
+}
+
+.type-label > svg {
+  fill: #484848;
+}
+
+.type-label:hover,
+.type-label:focus {
+  background: rgba(0, 0, 0, .05);
+}
+
+.type-tag:checked + .type-label {
+  transform: scale(1.1);
+}
+
+.type-tag:checked + .type-label.food {
+  border: none;
+  background: #ffab00;
+}
+
+.type-tag:checked + .type-label.drink {
+  border: none;
+  background: #607d8b;
+}
+
+.type-tag:checked + .type-label.ticket {
+  border: none;
+  background: #c2185b;
+}
+
+.type-tag:checked + .type-label.food:hover,
+.type-tag:checked + .type-label.food:focus {
+  background: #ff8f00;
+}
+
+.type-tag:checked + .type-label.drink:hover,
+.type-tag:checked + .type-label.drink:focus {
+  background: #78909c;
+}
+
+.type-tag:checked + .type-label.ticket:hover,
+.type-tag:checked + .type-label.ticket:focus {
+  background: #d81b60;
+}
+
+.type-tag:checked + .type-label > svg {
+  fill: #fff;
+}
+
+/* TAG FILTER */
+
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tag-label {
+  margin: 5px 8px;
+  height: 2rem;
+  line-height: 2rem;
+  padding: 0 1rem 0 1.25rem;
+  border-radius: 1rem;
+  border: solid 1px #24b37f;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.tag-label:hover,
+.tag-label:focus {
+  background: rgba(0, 0, 0, .05);
+}
+
+.tag-label > .remove {
+  display: inline-block;
+  padding-left: 0.25rem;
+  max-width: 0;
+  color: #fff;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.tag:checked + .tag-label {
+  background: #24b37f;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+@media screen and (min-width: 36rem) {
+  .tag:checked + .tag-label {
+    margin: 5px;
   }
 }
 
+.tag:checked + .tag-label:hover,
+.tag:checked + .tag-label:focus {
+  background: #21a777;
+}
+
+input:checked + .tag-label > .remove {
+  opacity: 0.7;
+  padding-right: 0.25rem;
+}
+
+/* BUTTON *************************************************************************************************************/
+
+.btn--s {
+  padding: .25rem .5rem;
+}
+
+.btn--s, .small, small {
+  font-size: 0.9rem;
+}
+
+@media screen and (min-width: 36rem) {
+  .btn--s, .small, small {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (min-width: 48rem) {
+  .btn--s, .small, small {
+    font-size: 0.707rem;
+  }
+}
+
+/* VOUCHER ************************************************************************************************************/
+
+.voucher-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.voucher-container span:first-letter {
+  text-transform: capitalize;
+}
+
+.voucher-container .constraint {
+  display: block;
+  margin-top: -0.25rem;
+}
+
+.voucher-container .constraint:first-letter {
+  text-transform: capitalize;
+}
+
+h2 + .voucher-container {
+  margin-top: 2rem;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 4rem;
+  width: 4rem;
+}
+
+.icon-container.food {
+  background: #ffab00;
+}
+
+.icon-container.drink {
+  background: #607d8b;
+}
+
+.icon-container.ticket {
+  background: #c2185b;
+}
+
+.icon-container svg {
+  fill: #fff;
+}
+
+/* SVG ****************************************************************************************************************/
+
+svg {
+  height: 2rem;
+}
+
+svg.icon-small {
+  height: 1.5rem;
+}
+
+svg.icon-tiny {
+  height: 0.55rem;
+}
+
+/* HEADER *************************************************************************************************************/
+
+.logo.heart {
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+  margin-right: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+.logo.heart svg {
+  fill: #fafafa;
+  height: 1.25rem;
+  margin-left: 0.27rem;
+  margin-top: 0.25rem;
+  margin-bottom: -0.1rem;
+}
+
+.marked,
+.city-name {
+  display: inline-block;
+  height: 1.6rem;
+  overflow: visible;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.3rem;
+  border-bottom: solid 5px #69D2AC;
+}
+
+/* FOOTER *************************************************************************************************************/
+
+footer svg.icon-tiny {
+  fill: #484848;
+}
 

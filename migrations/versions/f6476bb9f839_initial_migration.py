@@ -1,8 +1,8 @@
-"""Initial migration
+"""initial migration
 
-Revision ID: b120061631a2
+Revision ID: f6476bb9f839
 Revises: 
-Create Date: 2019-02-11 23:53:09.970873
+Create Date: 2019-03-20 10:18:19.956813
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b120061631a2'
+revision = 'f6476bb9f839'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -41,12 +41,13 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('id_venue', sa.Integer(), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
+    sa.Column('limitations', sa.Text(), nullable=True),
     sa.ForeignKeyConstraint(['id_venue'], ['venue.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('voucher_tag',
     sa.Column('id_voucher', sa.Integer(), nullable=False),
-    sa.Column('tag', sa.Enum('BREAKFAST', 'MAIN_COURSE', 'SNACK', 'PASTRIES', 'ICE_CREAM', 'COFFEE', 'ALCOHOL', 'EVENT', 'TICKET', 'GUIDED_TOUR', 'WORKSHOP', 'SHOPPING', 'FREE_GIFT', 'COMBINATION', 'SEASONAL', name='tag'), nullable=False),
+    sa.Column('tag', sa.Enum('BREAKFAST', 'MAIN_COURSE', 'SNACK', 'PASTRIES', 'ICE_CREAM', 'COFFEE', 'ALCOHOL', 'TICKET', 'GUIDED_TOUR', 'WORKSHOP', 'SHOPPING', 'FREE_GIFT', 'COMBINATION', name='tag'), nullable=False),
     sa.ForeignKeyConstraint(['id_voucher'], ['voucher.id'], ),
     sa.PrimaryKeyConstraint('id_voucher', 'tag')
     )

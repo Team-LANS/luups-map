@@ -14,12 +14,12 @@ class UpdateCommand:
         self.place_cache = PlaceCache()
 
     def run(self):
-        self._load_venues()
+        # self._load_venues()
         self._load_locations()
-        self._update_venues()
+        # self._update_venues()
         self._update_locations()
-        self._create_locations()
-        self._write_files()
+        # self._create_locations()
+        # self._write_files()
 
     def _load_venues(self):
         print('Loading venues file...'.ljust(LINE_LENGTH), end=' ')
@@ -82,6 +82,8 @@ class UpdateCommand:
                 location['latitude'] = latitude
                 location['longitude'] = longitude
                 print('    {:<40s}{:<60s}{:>12.1f}{:>12.1f}'.format(name, address, latitude, longitude))
+                print(latitude)
+                print(longitude)
 
     def _create_locations(self):
         print('Fetching new locations...'.ljust(LINE_LENGTH))

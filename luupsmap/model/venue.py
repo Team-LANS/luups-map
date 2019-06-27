@@ -10,9 +10,6 @@ class Venue(db.Model):
     name = db.Column(db.String(128), nullable=False)
     description = db.Column(db.Text)
     homepage = db.Column(db.String(64))
-    email = db.Column(db.String(64))
-    phone = db.Column(db.String(32))
-    opening_hours = db.Column(db.Text)
 
     locations = db.relationship("Location", backref="venue")
     vouchers = db.relationship("Voucher", backref="venue")
@@ -24,9 +21,6 @@ class Venue(db.Model):
         self.name = data['name']
         self.description = data['description']
         self.homepage = data['homepage']
-        self.email = data['email']
-        self.phone = data['phone']
-        self.opening_hours = data['opening_hours']
 
         self.vouchers = data['vouchers']
         self.locations = data['locations']

@@ -18,3 +18,4 @@ def as_dto(dto_class):
 
 # IMPORTS
 from luupsmap.service.venue_service import *
+from luupsmap.service.location_service import *
