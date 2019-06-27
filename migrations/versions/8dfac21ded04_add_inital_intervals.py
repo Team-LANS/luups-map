@@ -1,8 +1,8 @@
 """Add inital intervals
 
-Revision ID: d2ac0a3b4696
-Revises: b120061631a2
-Create Date: 2019-06-27 20:25:22.466670
+Revision ID: 8dfac21ded04
+Revises: 7b5c45939b93
+Create Date: 2019-06-27 21:02:03.362392
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd2ac0a3b4696'
-down_revision = 'b120061631a2'
+revision = '8dfac21ded04'
+down_revision = '7b5c45939b93'
 branch_labels = None
 depends_on = None
 

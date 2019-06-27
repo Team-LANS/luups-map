@@ -4,7 +4,7 @@ from flask.cli import AppGroup, with_appcontext
 
 from luupsmap.cli.commands import SeedCommand, UpdateCommand
 from luupsmap import app, db
-from luupsmap.model import Venue, Location, Voucher, VoucherType, VoucherTag
+from luupsmap.model import Venue, Location, Voucher, VoucherType, VoucherTag, Interval
 
 LINE_LENGTH = 25
 
@@ -61,6 +61,7 @@ def nuke():
     session = db.session
     VoucherTag.__table__.drop(db.engine)
     VoucherType.__table__.drop(db.engine)
+    Interval.__table__.drop(db.engine)
     Location.__table__.drop(db.engine)
     Voucher.__table__.drop(db.engine)
     Venue.__table__.drop(db.engine)
