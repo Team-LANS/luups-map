@@ -12,6 +12,9 @@ class IntervalParser:
         self.parsed = []
 
     def parse(self, string):
+        if not string.strip():
+            return []
+
         blocks = [x.strip() for x in string.split(',')]
         for block in blocks:
             parts = [x.strip() for x in block.split(' ')]
@@ -23,7 +26,6 @@ class IntervalParser:
 
         start_hour, end_hour = self.__parse_hours(parts)
 
-        # TODO: Add variable months, e.g. if opening hours vary during the year
         start_month, end_month = self.__parse_months(parts)
 
         arguments = {
@@ -43,6 +45,7 @@ class IntervalParser:
     def __parse_days(self, parts):
         days = parts[0]
         day_split = days.split('-')
+        print(parts)
         start_day = self.DAY_MAPPING[day_split[0]]
         end_day = self.DAY_MAPPING[day_split[1]] if len(day_split) == 2 else start_day
         return start_day, end_day
@@ -54,7 +57,7 @@ class IntervalParser:
             months = parts[2]
             month_split = months.split('-')
             start_month = self.MONTH_MAPPING[month_split[0]]
-            end_month = self.MONTH_MAPPING[month_split[1]]
+            end_month = self.MONTH_MAPPING[month_split[1]] if len(month_split) > 1 else start_month
         return start_month, end_month
 
     def __split_hours(self, arguments):

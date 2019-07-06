@@ -14,12 +14,12 @@ class UpdateCommand:
         self.place_cache = PlaceCache()
 
     def run(self):
-        # self._load_venues()
+        self._load_venues()
         self._load_locations()
-        # self._update_venues()
+        self._update_venues()
         self._update_locations()
-        # self._create_locations()
-        # self._write_files()
+        self._create_locations()
+        self._write_files()
 
     def _load_venues(self):
         print('Loading venues file...'.ljust(LINE_LENGTH), end=' ')

@@ -17,13 +17,8 @@ class Location(db.Model):
     longitude = db.Column(db.Float, nullable=False)
 
     def __init__(self, data):
-        self.address = data['address']
-        self.email = data['email']
-        self.phone = data['phone']
-        self.opening_hours = data['opening_hours']
-        self.latitude = data['latitude']
-        self.longitude = data['longitude']
-        self.venue = data['venue']
+        for key in data:
+            setattr(self, key, data[key])
 
     def __repr__(self):
         return '<LOCATION "{}">'.format(self.address)

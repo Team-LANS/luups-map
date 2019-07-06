@@ -7,6 +7,7 @@ from luupsmap.model import Venue, Location, Voucher, VoucherType, VoucherTag, Ty
 class SeedCommand:
     venues = []
     locations = {}
+    intervals = {}
     vouchers = {}
 
     def __init__(self, venues_file, locations_file, vouchers_file):
@@ -45,9 +46,7 @@ class SeedCommand:
             venue['vouchers'] = []
             venue['locations'] = []
             venue = Venue(venue)
-            self.__create_locations(venue, locations)
-            for location in locations:
-                self.__create__intervals(location, intervals)
+            self.__create_locations(venue, locations, intervals)
             self.__create_vouchers(venue, vouchers)
         db.session.add_all(venues)
         db.session.add_all(locations)
@@ -55,24 +54,27 @@ class SeedCommand:
         db.session.add_all(vouchers)
         db.session.commit()
 
-    def __create_locations(self, venue, locations):
+    def __create_locations(self, venue, locations, intervals):
         name = venue.name
         if name not in self.locations:
             return
         for location in self.locations[name]:
             location['venue'] = venue
+            opening_hours = location['opening_hours']
+            location['opening_hours'] = []
             location = Location(location)
+
+            self.__create__intervals(location, opening_hours, intervals)
             venue.locations.append(location)
             locations.append(location)
 
-    def __create__intervals(self, location, intervals):
-        string = location['opening_hours']
-        new_intervals = IntervalParser().parse(string)
-        interval_models = []
-        for interval in new_intervals:
-            interval['id_location'] = location.id
-            interval_models.append(Interval(interval))
-        location.opening_hours.append(new_intervals)
+    def __create__intervals(self, location, opening_hours, intervals):
+        parsed_intervals = IntervalParser().parse(opening_hours)
+        for interval in parsed_intervals:
+            interval['location'] = location
+            model = Interval(interval)
+            intervals.append(model)
+            location.opening_hours.append(model)
 
     def __create_vouchers(self, venue, vouchers):
         name = venue.name
