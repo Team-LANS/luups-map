@@ -1,8 +1,6 @@
 import calendar
 import time
 
-from luupsmap import Interval
-
 
 class IntervalParser:
     DAY_MAPPING = {v[:2]: k for k, v in enumerate(calendar.day_abbr)}
@@ -39,10 +37,8 @@ class IntervalParser:
 
         if start_hour > end_hour:
             self.__split_hours(arguments)
-            # Split into two args in case we have opening hours like Mo 22:00 - 04:00. This should result in two
-            # intervals, one being Mo 22:00-00:00 and one being Tu 00:00-04:00.
         else:
-            self.parsed.append(Interval(arguments))
+            self.parsed.append(arguments)
 
     def __parse_days(self, parts):
         days = parts[0]
@@ -64,11 +60,11 @@ class IntervalParser:
     def __split_hours(self, arguments):
         additional_args = arguments.copy()
         arguments['end_hour'] = '24:00'
-        self.parsed.append(Interval(arguments))
+        self.parsed.append(arguments)
         additional_args['start_hour'] = '00:00'
         additional_args['start_day'] = arguments['start_day'] + 1
         additional_args['end_day'] = arguments['end_day'] + 1
-        self.parsed.append(Interval(additional_args))
+        self.parsed.append(additional_args)
 
     def __parse_hours(self, parts):
         hours = parts[1]

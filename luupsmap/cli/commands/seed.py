@@ -1,7 +1,7 @@
-from cli.util.interval_parser import IntervalParser
 from luupsmap import db
 from luupsmap.cli.util import CsvFile
-from luupsmap.model import Venue, Location, Voucher, VoucherType, VoucherTag, Type, Tag
+from luupsmap.cli.util.interval_parser import IntervalParser
+from luupsmap.model import Venue, Location, Voucher, VoucherType, VoucherTag, Type, Tag, Interval
 
 
 class SeedCommand:
@@ -51,6 +51,7 @@ class SeedCommand:
             self.__create_vouchers(venue, vouchers)
         db.session.add_all(venues)
         db.session.add_all(locations)
+        db.session.add_all(intervals)
         db.session.add_all(vouchers)
         db.session.commit()
 
@@ -67,10 +68,11 @@ class SeedCommand:
     def __create__intervals(self, location, intervals):
         string = location['opening_hours']
         new_intervals = IntervalParser().parse(string)
+        interval_models = []
         for interval in new_intervals:
-            interval.id_location = location.id
+            interval['id_location'] = location.id
+            interval_models.append(Interval(interval))
         location.opening_hours.append(new_intervals)
-        intervals.append(new_intervals)
 
     def __create_vouchers(self, venue, vouchers):
         name = venue.name
