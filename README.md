@@ -45,6 +45,8 @@ APP_SETTINGS="luupsmap.config.DevelopmentConfig"
 
 SECRET_KEY=<application-key>
 
+DB_NAME=<db-name, e.g luups_map_dev>
+DB_ADDRESS=<db-address. e.g. localhost:5432>
 DB_USER = <db-user>
 DB_PW = <db-password>
 
