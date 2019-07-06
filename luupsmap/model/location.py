@@ -12,7 +12,7 @@ class Location(db.Model):
     address = db.Column(db.String(256), nullable=False)
     email = db.Column(db.String(64))
     phone = db.Column(db.String(32))
-    opening_hours = db.Column(db.Text)
+    opening_hours = db.relationship("Interval", backref="location")
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
 

@@ -1,3 +1,4 @@
+from cli.util.interval_parser import IntervalParser
 from luupsmap import db
 from luupsmap.cli.util import CsvFile
 from luupsmap.model import Venue, Location, Voucher, VoucherType, VoucherTag, Type, Tag
@@ -18,39 +19,42 @@ class SeedCommand:
     def run(self):
         print('Start seeding tables...'.ljust(25), end=' ')
         self.venues = self.venues_file.load()
-        self._load_locations()
-        self._load_vouchers()
-        self._create_and_save_models()
+        self.__load_locations()
+        self.__load_vouchers()
+        self.__create_and_save_models()
         print('Done')
 
-    def _load_locations(self):
+    def __load_locations(self):
         locations = self.locations_file.load()
         for location in locations:
             name = location['name']
             self.locations.setdefault(name, []).append(location)
 
-    def _load_vouchers(self):
+    def __load_vouchers(self):
         vouchers = self.vouchers_file.load()
         for voucher in vouchers:
             name = voucher['name']
             self.vouchers.setdefault(name, []).append(voucher)
 
-    def _create_and_save_models(self):
+    def __create_and_save_models(self):
         venues = []
         locations = []
+        intervals = []
         vouchers = []
         for venue in self.venues:
             venue['vouchers'] = []
             venue['locations'] = []
             venue = Venue(venue)
-            self._create_locations(venue, locations)
-            self._create_vouchers(venue, vouchers)
+            self.__create_locations(venue, locations)
+            for location in locations:
+                self.__create__intervals(location, intervals)
+            self.__create_vouchers(venue, vouchers)
         db.session.add_all(venues)
         db.session.add_all(locations)
         db.session.add_all(vouchers)
         db.session.commit()
 
-    def _create_locations(self, venue, locations):
+    def __create_locations(self, venue, locations):
         name = venue.name
         if name not in self.locations:
             return
@@ -60,20 +64,28 @@ class SeedCommand:
             venue.locations.append(location)
             locations.append(location)
 
-    def _create_vouchers(self, venue, vouchers):
+    def __create__intervals(self, location, intervals):
+        string = location['opening_hours']
+        new_intervals = IntervalParser().parse(string)
+        for interval in new_intervals:
+            interval.id_location = location.id
+        location.opening_hours.append(new_intervals)
+        intervals.append(new_intervals)
+
+    def __create_vouchers(self, venue, vouchers):
         name = venue.name
         if name not in self.vouchers:
             return
         for voucher in self.vouchers[name]:
-            self._convert_voucher_types(voucher)
-            self._convert_voucher_tags(voucher)
+            self.__convert_voucher_types(voucher)
+            self.__convert_voucher_tags(voucher)
             voucher['venue'] = venue
             voucher = Voucher(voucher)
             venue.vouchers.append(voucher)
             vouchers.append(voucher)
 
     @staticmethod
-    def _convert_voucher_types(voucher):
+    def __convert_voucher_types(voucher):
         # In case we already converted string to proper types
         if type(voucher['voucher_types']) == list:
             return
@@ -81,7 +93,7 @@ class SeedCommand:
         voucher['voucher_types'] = [VoucherType(Type[voucher_type]) for voucher_type in voucher_types]
 
     @staticmethod
-    def _convert_voucher_tags(voucher):
+    def __convert_voucher_tags(voucher):
         # In case we already converted string to proper types
         if type(voucher['voucher_tags']) == list:
             return
