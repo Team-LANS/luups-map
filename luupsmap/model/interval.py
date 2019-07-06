@@ -16,15 +16,8 @@ class Interval(db.Model):
     end_month = db.Column(db.Integer, nullable=False)
 
     def __init__(self, data):
-        self.venue = data['venue']
-        self.start_hour = data['start_hour']
-        self.end_hour = data['end_hour']
-        self.start_day = data['start_day']
-        self.end_day = data['end_day']
-        self.start_month = data['start_month']
-        self.end_month = data['end_month']
+        for key in data:
+            setattr(self, key, data[key])
 
     def __repr__(self):
         return '<INTERVAL "{}">'.format(self.id)
-
-
