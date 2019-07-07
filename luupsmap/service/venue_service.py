@@ -1,7 +1,9 @@
 from luupsmap import db
 from luupsmap.dto.venue_dto import VenueDto, VenueDetailDto
-from luupsmap.model import Venue, Voucher, VoucherType, VoucherTag
+from luupsmap.model import Venue, Voucher, VoucherType, VoucherTag, Location, Interval
 from luupsmap.service import as_dto
+
+from datetime import datetime
 
 
 class VenueService:
@@ -26,6 +28,15 @@ class VenueService:
 
         return venues
 
+    @as_dto(VenueDetailDto)
+    def get(self, venue_id):
+        return self.db_session.query(Venue).get(venue_id)
+
+    @as_dto(VenueDto)
+    def create(self, venue):
+        self.db_session.add(venue)
+        return self.db_session.commit()
+
     @as_dto(VenueDto)
     def __find_all(self):
         return self.db_session.query(Venue).all()
@@ -35,21 +46,27 @@ class VenueService:
         venues = self.db_session.query(Venue) \
             .join(Voucher) \
             .join(VoucherType) \
+            .join(Location) \
+            .outerjoin(Interval) \
             .outerjoin(VoucherTag)
+        today = datetime.today()
+        weekday = today.weekday()
+        month = today.month
+        time = today.time()
         if types:
             venues = venues.filter(VoucherType.type.in_(types))
         if tags:
             venues = venues.filter(VoucherTag.tag.in_(tags))
+        if time:
+            venues = venues.filter(time >= Interval.start_hour,
+                                   time <= Interval.end_hour,
+                                   weekday >= Interval.start_day,
+                                   weekday <= Interval.end_day,
+                                   month >= Interval.start_month,
+                                   month <= Interval.end_month)
+
         return venues.all()
 
-    @as_dto(VenueDetailDto)
-    def get(self, venue_id):
-        return self.db_session.query(Venue).get(venue_id)
-
-    @as_dto(VenueDto)
-    def create(self, venue):
-        self.db_session.add(venue)
-        return self.db_session.commit()
 
     @staticmethod
     def __determine_type(vouchers):
