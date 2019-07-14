@@ -45,28 +45,26 @@ class VenueService:
     def __filter_by(self, types, tags):
         venues = self.db_session.query(Venue) \
             .join(Voucher) \
-            .join(VoucherType) \
-            .join(Location) \
-            .outerjoin(Interval) \
-            .outerjoin(VoucherTag)
+            .join(Location)
         today = datetime.today()
         weekday = today.weekday()
         month = today.month
         time = today.time()
         if types:
-            venues = venues.filter(VoucherType.type.in_(types))
+            venues = venues.join(VoucherType).filter(VoucherType.type.in_(types))
         if tags:
-            venues = venues.filter(VoucherTag.tag.in_(tags))
+            venues = venues.join(VoucherTag).filter(VoucherTag.tag.in_(tags))
         if time:
-            venues = venues.filter(time >= Interval.start_hour,
-                                   time <= Interval.end_hour,
-                                   weekday >= Interval.start_day,
-                                   weekday <= Interval.end_day,
-                                   month >= Interval.start_month,
-                                   month <= Interval.end_month)
+            venues = venues \
+                .outerjoin(Interval) \
+                .filter(time >= Interval.start_hour,
+                        time <= Interval.end_hour,
+                        weekday >= Interval.start_day,
+                        weekday <= Interval.end_day,
+                        month >= Interval.start_month,
+                        month <= Interval.end_month)
 
         return venues.all()
-
 
     @staticmethod
     def __determine_type(vouchers):
