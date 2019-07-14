@@ -9,10 +9,10 @@ const showModal = (value) => {
   if (value) {
     modal.classList.add('visible');
     overlay.classList.add('visible')
-  }
-  else {
+  } else {
     modal.classList.remove('visible');
     overlay.classList.remove('visible')
   }
 };
+
 

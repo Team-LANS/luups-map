@@ -35,6 +35,13 @@
             {% endfor %}
           </section>
 
+          <h4 class="marked">Zeit</h4>
+          <section class="tag-container">
+            <label for="picker"></label>
+            <input id="picker" type="hidden" class="form-control js-mini-picker">
+            <div class="picker-container"></div>
+          </section>
+
         </article>
 
         <footer class="modal-footer ">
@@ -75,6 +82,18 @@
     {% endfor %}
   </script>
 
+  <script>
+    const input = document.getElementById('picker');
+    const picker = new Picker(input, {
+      container: '.picker-container',
+      format: 'HH:mm DD-MM-YYYY',
+      language: 'de-DE',
+      headers: true,
+      inline: true,
+      rows: 3,
+      title: false,
+    });
+  </script>
   <script>
     // TODO: This is a hack to avoid the form resubmission popup.
     // Use a better way (e.g. ajax requests or something) to accomplish that

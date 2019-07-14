@@ -1,6 +1,15 @@
 /* FONTS **************************************************************************************************************/
 @import url('https://fonts.googleapis.com/css?family=Amaranth:400,700|Open+Sans:300,400,700');
 
+/*CSS Variables? */
+:root {
+  --gray: #999;
+  --blue: #0074d9;
+  --color: #333;
+  --background-color: #fff;
+  --border: 1px solid #eee;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
 }

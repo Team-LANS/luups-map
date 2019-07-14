@@ -16,7 +16,7 @@ def index():
     return render_template('main.html', venues=venues_, types=types, tags=tags)
 
 
-@app.route('/', methods=['POST'])
+@app.route('/venues', methods=['POST'])
 def filter():
     types = [t for t in Type if t.name.lower() in request.form.keys()]
     tags = [t for t in Tag if "tag-" + t.name.lower() in request.form.keys()]
