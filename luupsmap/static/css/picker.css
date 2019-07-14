@@ -279,7 +279,6 @@
 
 .picker-picked {
   color: #0074d9;
-  color: var(--green);
   font-size: 1.125em;
   line-height: 1.5rem;
 }

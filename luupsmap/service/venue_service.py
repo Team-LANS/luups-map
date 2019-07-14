@@ -19,8 +19,8 @@ class VenueService:
 
         return venues
 
-    def filter_by(self, types, tags):
-        venues = self.__filter_by(types, tags)
+    def filter_by(self, types, tags, time):
+        venues = self.__filter_by(types, tags, time)
 
         # TODO: Improve conversion to DTO so we dont' have to patch this afterwards
         for venue in venues:
@@ -42,19 +42,22 @@ class VenueService:
         return self.db_session.query(Venue).all()
 
     @as_dto(VenueDto)
-    def __filter_by(self, types, tags):
+    def __filter_by(self, types, tags, time):
         venues = self.db_session.query(Venue) \
             .join(Voucher) \
             .join(Location)
-        today = datetime.today()
-        weekday = today.weekday()
-        month = today.month
-        time = today.time()
         if types:
-            venues = venues.join(VoucherType).filter(VoucherType.type.in_(types))
+            venues = venues \
+                .join(VoucherType) \
+                .filter(VoucherType.type.in_(types))
         if tags:
-            venues = venues.join(VoucherTag).filter(VoucherTag.tag.in_(tags))
+            venues = venues \
+                .join(VoucherTag) \
+                .filter(VoucherTag.tag.in_(tags))
         if time:
+            weekday = time.weekday()
+            month = time.month
+            time = time.time()
             venues = venues \
                 .outerjoin(Interval) \
                 .filter(time >= Interval.start_hour,
