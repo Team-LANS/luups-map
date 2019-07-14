@@ -25,3 +25,4 @@ class VenueDetailDto(VenueDto):
     def __init__(self, data):
         super().__init__(data)
         self.description = data.description
+        self.opening_hours = "new"

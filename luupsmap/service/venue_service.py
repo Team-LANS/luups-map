@@ -3,8 +3,6 @@ from luupsmap.dto.venue_dto import VenueDto, VenueDetailDto
 from luupsmap.model import Venue, Voucher, VoucherType, VoucherTag, Location, Interval
 from luupsmap.service import as_dto
 
-from datetime import datetime
-
 
 class VenueService:
     def __init__(self):

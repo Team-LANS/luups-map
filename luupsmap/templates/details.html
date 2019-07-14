@@ -39,6 +39,8 @@
         </section>
       {% endfor %}
       <p class="py1">{{ venue.description }}</p>
+
+      <p class="py1">{{ venue.opening_hours }}</p>
       <small><strong class="fnt--dark-gray">
         {# TODO: Fix dots when no phone or email exist#}
         {% set homepages = venue.homepage.replace(' ', '').split(',') %}
