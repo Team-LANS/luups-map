@@ -8,16 +8,7 @@
  * Date: 2019-02-18T13:08:09.658Z
  */
 
-:root {
-  --gray: #999;
-  --blue: #0074d9;
-  --color: #333;
-  --background-color: #fff;
-  --border: 1px solid #eee;
-}
-
 .picker {
-  background-color: rgba(0, 0, 0, 0.5);
   color: #333;
   color: var(--color);
   direction: ltr;
@@ -33,6 +24,8 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  border-radius: 5px;
+  border: 1px solid var(--green);
 }
 
 .picker-fixed {
@@ -77,14 +70,11 @@
 
 .picker-dialog {
   background-color: #fff;
-  background-color: var(--background-color);
   border: 1px solid #eee;
-  border: var(--border);
 }
 
 .picker-header {
   border-bottom: 1px solid #eee;
-  border-bottom: var(--border);
   display: none;
   padding: 0.875rem 1.25rem;
   position: relative;
@@ -278,7 +268,7 @@
 }
 
 .picker-picked {
-  color: #0074d9;
+  color: var(--green);
   font-size: 1.125em;
   line-height: 1.5rem;
 }
