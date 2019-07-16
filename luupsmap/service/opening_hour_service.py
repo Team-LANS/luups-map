@@ -63,6 +63,10 @@ class OpeningHourService:
     def __get_hours(interval):
         start_time = interval.start_hour.strftime("%H:%M")
         end_time = interval.end_hour.strftime("%H:%M")
+
+        if end_time == '00:00':
+            end_time = '24:00'
+
         return '{}-{}'.format(start_time, end_time)
 
     def __get_months(self, interval):
