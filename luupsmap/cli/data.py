@@ -77,6 +77,7 @@ def remove_data():
     session.query(VoucherTag).delete()
     session.query(VoucherType).delete()
     session.query(Voucher).delete()
+    session.query(Interval).delete()
     session.query(Location).delete()
     session.query(Venue).delete()
     session.commit()

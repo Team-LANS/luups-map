@@ -9,7 +9,7 @@
     months: [
       'Januar',
       'Februar',
-      'M�rz',
+      'März',
       'April',
       'Mai',
       'Juni',

@@ -35,12 +35,22 @@
             {{ voucher.description }}<br>
             <small class="constraint fnt--mid-gray">{{ voucher.limitations }}</small>
           </span>
-
         </section>
       {% endfor %}
       <p class="py1">{{ venue.description }}</p>
 
-      <p class="py1">{{ venue.opening_hours }}</p>
+      {% if location.opening_hours.entries %}
+        <h4>Öffnungszeiten</h4>
+        {% for entry in location.opening_hours.entries %}
+          <div class="grd-row">
+            <div class="grd-row-col-2-6--md">{{ entry['days'] }}</div>
+            <div class="grd-row-col-2-6--md">{{ entry['hours'] }}</div>
+          {% if entry['months'] %}
+            <div class="grd-row-col-2-6--md">{{ entry['months'] }}</div>
+            {% endif%}
+          </div>
+        {% endfor %}
+      {% endif %}
       <small><strong class="fnt--dark-gray">
         {# TODO: Fix dots when no phone or email exist#}
         {% set homepages = venue.homepage.replace(' ', '').split(',') %}

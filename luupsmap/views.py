@@ -1,9 +1,11 @@
 from flask import render_template, redirect, url_for, request
 
 from datetime import datetime
+
 from luupsmap import app
 from luupsmap.service import VenueService, LocationService
 from luupsmap.model import Type, Tag
+from luupsmap.dto import LocationSearchDto
 
 venue_service = VenueService()
 location_service = LocationService()
@@ -15,6 +17,13 @@ def index():
     tags = [(t.name.lower(), Tag.translation(t)) for t in Tag]
     types = [t.name.lower() for t in Type]
     return render_template('main.html', venues=venues_, types=types, tags=tags)
+
+
+@app.route('/location', methods=['GET'])
+def location():
+    payload = request.get_json()
+    locations = location_service.find_all(LocationSearchDto(payload))
+    return  render_template('main.html')
 
 
 @app.route('/', methods=['POST'])

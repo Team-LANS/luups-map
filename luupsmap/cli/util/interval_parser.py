@@ -8,7 +8,7 @@ class IntervalParser:
     MONTH_MAPPING = {v: k for k, v in enumerate(calendar.month_abbr)}
 
     def __init__(self):
-        self.DAY_MAPPING.update({'Ft': 8})
+        self.DAY_MAPPING.update({'Ft': 7})
         self.parsed = []
 
     def parse(self, string):
@@ -37,7 +37,7 @@ class IntervalParser:
             'end_month': end_month,
         }
 
-        if start_hour > end_hour:
+        if start_hour > end_hour and not end_hour == '00:00':
             self.__split_hours(arguments)
         else:
             self.parsed.append(arguments)
@@ -45,7 +45,6 @@ class IntervalParser:
     def __parse_days(self, parts):
         days = parts[0]
         day_split = days.split('-')
-        print(parts)
         start_day = self.DAY_MAPPING[day_split[0]]
         end_day = self.DAY_MAPPING[day_split[1]] if len(day_split) == 2 else start_day
         return start_day, end_day
