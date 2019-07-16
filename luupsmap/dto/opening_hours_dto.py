@@ -7,4 +7,4 @@ class OpeningHoursDto(object):
 
     def __init__(self, location):
         self.id_location = location.id
-        self.entries = OpeningHourService(location).get_readable()
+        self.entries = OpeningHourService(location.opening_hours).get_readable()

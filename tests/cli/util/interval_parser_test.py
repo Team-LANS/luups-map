@@ -7,10 +7,12 @@ from luupsmap.cli.util.interval_parser import IntervalParser
 def parser():
     return IntervalParser()
 
+
 def test_empty_entry_should_return_empty(parser):
     interval = parser.parse(' ')
 
     assert [] == interval
+
 
 def test_single_entry_with_simple_hours_should_parse(parser):
     interval = parser.parse('Mo-Fr 10-12')[0]
@@ -29,6 +31,7 @@ def test_single_entry_with_single_day_should_parse(parser):
     assert interval['start_hour'] == '10:00'
     assert interval['end_hour'] == '12:00'
 
+
 def test_single_entry_with_midnight_should_parse(parser):
     interval = parser.parse('Tu 10-0')[0]
 
@@ -36,6 +39,7 @@ def test_single_entry_with_midnight_should_parse(parser):
     assert interval['end_day'] == 1
     assert interval['start_hour'] == '10:00'
     assert interval['end_hour'] == '24:00'
+
 
 def test_single_entry_with_detailed_hours_should_parse(parser):
     interval = parser.parse('Mo-Fr 10:30-12:45')[0]
@@ -62,11 +66,13 @@ def test_multiple_entries_should_parse(parser):
 
     assert len(interval) == 2
 
+
 def test_single_entry_with_single_month_should_parse(parser):
     interval = parser.parse('Mo 10-12 Jan')[0]
 
     assert interval['start_month'] == 1
     assert interval['end_month'] == 1
+
 
 def test_single_entry_with_months_should_parse(parser):
     interval = parser.parse('Mo 10-12 Jan-Jul')[0]

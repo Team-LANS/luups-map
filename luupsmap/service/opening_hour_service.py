@@ -2,8 +2,8 @@ from calendar import different_locale, day_name, day_abbr, month_abbr, month_nam
 
 
 class OpeningHourService:
-    def __init__(self, location):
-        self.opening_hours = location.opening_hours
+    def __init__(self, opening_hours):
+        self.opening_hours = opening_hours
 
     def get_readable(self):
         self.__merge_intervals()
