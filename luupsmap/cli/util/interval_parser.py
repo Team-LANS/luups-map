@@ -37,7 +37,7 @@ class IntervalParser:
             'end_month': end_month,
         }
 
-        if start_hour > end_hour and not end_hour == '00:00':
+        if start_hour > end_hour:
             self.__split_hours(arguments)
         else:
             self.parsed.append(arguments)
@@ -49,6 +49,14 @@ class IntervalParser:
         end_day = self.DAY_MAPPING[day_split[1]] if len(day_split) == 2 else start_day
         return start_day, end_day
 
+    def __parse_hours(self, parts):
+        hours = parts[1]
+        hours_split = hours.split('-')
+        start_hour = time.strftime('%H:%M', self.__try_parse_hour(hours_split[0]))
+        end_hour = time.strftime('%H:%M', self.__try_parse_hour(hours_split[1]))
+
+        return start_hour, end_hour
+
     def __parse_months(self, parts):
         start_month = 1
         end_month = 12
@@ -59,6 +67,14 @@ class IntervalParser:
             end_month = self.MONTH_MAPPING[month_split[1]] if len(month_split) > 1 else start_month
         return start_month, end_month
 
+    @staticmethod
+    def __try_parse_hour(hour):
+        try:
+            start_hour = time.strptime(hour, "%H")
+        except ValueError:
+            start_hour = time.strptime(hour, "%H:%M")
+        return start_hour
+
     def __split_hours(self, arguments):
         additional_args = arguments.copy()
         arguments['end_hour'] = '24:00'
@@ -67,18 +83,3 @@ class IntervalParser:
         additional_args['start_day'] = arguments['start_day'] + 1
         additional_args['end_day'] = arguments['end_day'] + 1
         self.parsed.append(additional_args)
-
-    def __parse_hours(self, parts):
-        hours = parts[1]
-        hours_split = hours.split('-')
-        start_hour = time.strftime('%H:%M', self.__try_parse_hour(hours_split[0]))
-        end_hour = time.strftime('%H:%M', self.__try_parse_hour(hours_split[1]))
-        return start_hour, end_hour
-
-    @staticmethod
-    def __try_parse_hour(hour):
-        try:
-            start_hour = time.strptime(hour, "%H")
-        except ValueError:
-            start_hour = time.strptime(hour, "%H:%M")
-        return start_hour

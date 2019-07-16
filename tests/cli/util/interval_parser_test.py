@@ -29,6 +29,13 @@ def test_single_entry_with_single_day_should_parse(parser):
     assert interval['start_hour'] == '10:00'
     assert interval['end_hour'] == '12:00'
 
+def test_single_entry_with_midnight_should_parse(parser):
+    interval = parser.parse('Tu 10-0')[0]
+
+    assert interval['start_day'] == 1
+    assert interval['end_day'] == 1
+    assert interval['start_hour'] == '10:00'
+    assert interval['end_hour'] == '24:00'
 
 def test_single_entry_with_detailed_hours_should_parse(parser):
     interval = parser.parse('Mo-Fr 10:30-12:45')[0]
