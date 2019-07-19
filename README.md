@@ -45,6 +45,8 @@ APP_SETTINGS="luupsmap.config.DevelopmentConfig"
 
 SECRET_KEY=<application-key>
 
+DB_NAME=<db-name, e.g luups_map_dev>
+DB_ADDRESS=<db-address. e.g. localhost:5432>
 DB_USER = <db-user>
 DB_PW = <db-password>
 
@@ -99,4 +101,11 @@ flask data update
 ```
 
 This will update the CSV with missing location data and venue data. For more information see
-[update.py](/luupsmap/cli/commands/update.py).
+[update.py](/luupsmap/cli/commands/update.py). In order to set opening hours for a specific location edit the column 
+`opening_hours`. The data seeder expects opening hours of the format:
+
+```
+Day[-Day] Hour[-Hour] [Month[-Month]], ...
+```
+
+where expressions in brackets are optional, days and months are shortened english names (e.g. `Mo, Tu, We`, `May, Jun, Jul`) and hours have either the long format `hh:mm` or simply `hh`. 

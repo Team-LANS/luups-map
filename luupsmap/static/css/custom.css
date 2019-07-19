@@ -1,6 +1,19 @@
 /* FONTS **************************************************************************************************************/
 @import url('https://fonts.googleapis.com/css?family=Amaranth:400,700|Open+Sans:300,400,700');
 
+/*CSS Variables? */
+:root {
+  --yellow: #ffab00;
+  --red: #c2185b;
+  --green: #24b37f;
+  --light-green: #25ba84;
+  --gris: #607d8b;
+  --gray: #484848;
+  --light-gray: #414141;
+  --color: #333;
+  --background: #fff;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
 }
@@ -389,20 +402,24 @@ h2 + .voucher-container {
 }
 
 .icon-container.food {
-  background: #ffab00;
+  background: var(--yellow);
 }
 
 .icon-container.drink {
-  background: #607d8b;
+  background: var(--gris);
 }
 
 .icon-container.ticket {
-  background: #c2185b;
+  background: var(--red);
 }
 
 .icon-container svg {
-  fill: #fff;
+  fill: var(--background);
 }
+
+
+/* OPENING HOURS  *****************************************************************************************************/
+
 
 /* SVG ****************************************************************************************************************/
 

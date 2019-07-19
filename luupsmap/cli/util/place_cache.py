@@ -3,6 +3,7 @@ import googlemaps
 from luupsmap import app
 
 
+# Store place details, which are used multiple times to save on requests to the Google API
 class PlaceCache:
     places = {}
 

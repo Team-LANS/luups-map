@@ -27,11 +27,19 @@
           <h4 class="marked">Tags</h4>
           <section class="tag-container">
             {% for tag in tags %}
-              {%  set tag_name = tag[0] %}
-              {%  set tag_pretty = tag[1] %}
+              {% set tag_name = tag[0] %}
+              {% set tag_pretty = tag[1] %}
               <input type="checkbox" id="tag-{{ tag_name }}" name="tag-{{ tag_name }}" class="tag">
-              <label for="tag-{{ tag_name }}" class="tag-label">{{ tag_pretty }}<span class="remove">&times;</span></label>
+              <label for="tag-{{ tag_name }}" class="tag-label">{{ tag_pretty }}<span
+                class="remove">&times;</span></label>
             {% endfor %}
+          </section>
+
+          <h4 class="marked">Zeit</h4>
+          <section class="tag-container">
+            <label for="time"></label>
+            <input id="picker" type="hidden" name="time" class="form-control js-mini-picker">
+            <div id=picker-container" class="picker-container"></div>
           </section>
 
         </article>
@@ -72,5 +80,26 @@
         });
       {% endfor %}
     {% endfor %}
+  </script>
+
+  <script>
+    const input = document.getElementById('picker');
+    const picker = new Picker(input, {
+      container: '.picker-container',
+      format: 'HH:mm DD-MM-YYYY',
+      language: 'de-DE',
+      headers: true,
+      inline: true,
+      rows: 3,
+      title: false,
+    });
+  </script>
+
+  <script>
+    // TODO: This is a hack to avoid the form resubmission popup.
+    // Use a better way (e.g. ajax requests or something) to accomplish that
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+    }
   </script>
 {% endblock %}

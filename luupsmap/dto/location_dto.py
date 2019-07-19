@@ -1,5 +1,7 @@
 """Location DTOs."""
 
+from luupsmap.dto import OpeningHoursDto
+
 
 class LocationDto(object):
     __slots__ = 'id', 'id_venue', 'address', 'latitude', 'longitude', 'email', 'phone', 'opening_hours'
@@ -12,4 +14,12 @@ class LocationDto(object):
         self.longitude = data.longitude
         self.email = data.email
         self.phone = data.phone
-        self.opening_hours = data.opening_hours
+        self.opening_hours = OpeningHoursDto(data)
+
+
+class LocationSearchDto(object):
+    __slots__ = 'opening_time', 'voucher_tags', 'voucher_types'
+
+    def __init__(self, data):
+        for key in data:
+            setattr(self, key, data[key])

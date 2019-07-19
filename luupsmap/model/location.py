@@ -12,18 +12,13 @@ class Location(db.Model):
     address = db.Column(db.String(256), nullable=False)
     email = db.Column(db.String(64))
     phone = db.Column(db.String(32))
-    opening_hours = db.Column(db.Text)
+    opening_hours = db.relationship("Interval", backref="location")
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
 
     def __init__(self, data):
-        self.address = data['address']
-        self.email = data['email']
-        self.phone = data['phone']
-        self.opening_hours = data['opening_hours']
-        self.latitude = data['latitude']
-        self.longitude = data['longitude']
-        self.venue = data['venue']
+        for key in data:
+            setattr(self, key, data[key])
 
     def __repr__(self):
         return '<LOCATION "{}">'.format(self.address)
